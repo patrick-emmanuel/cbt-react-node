@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { AuthContext } from './context';
 import { SIGN_UP_MUTATION, LOGIN_MUTATION } from '../mutations';
-import { setAuthToken, removeAuthToken } from '../../utils/auth';
+import { getAuthToken, setAuthToken, removeAuthToken } from '../../utils/auth';
 
 export const AuthContext = React.createContext();
 
-const AuthProvider = ({ history }) => {
+const AuthProvider = ({ children, history }) => {
 
   const token = getAuthToken();
-  const [user, setUser] = useState('');
+  const [user, setUser] = React.useState('');
 
   const logout = () => {
     removeAuthToken();
