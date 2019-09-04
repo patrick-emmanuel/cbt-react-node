@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useMutation } from '@apollo/react-hooks';
+import { withRouter } from "react-router-dom";
 import { SIGN_UP_MUTATION, LOGIN_MUTATION } from '../mutations';
 import { getAuthToken, setAuthToken, removeAuthToken } from '../../utils/auth';
 
@@ -35,8 +36,9 @@ const AuthProvider = ({ children, history }) => {
         const { user, token } = data.signup;
         authenticate(token, user);
       },
-      onError() {
+      onError(error) {
         removeAuthToken();
+        console.log(error);
       }
     }
   );
@@ -55,7 +57,7 @@ const AuthProvider = ({ children, history }) => {
         const { user, token } = data.login;
         authenticate(token, user);
       },
-      onError() {
+      onError(error) {
         removeAuthToken();
       }
     }
@@ -67,7 +69,7 @@ const AuthProvider = ({ children, history }) => {
       // verifyUser({ token: userToken });
       console.log('Verify token');
     }
-  }, []);
+  }, [login, loginData, token, user]);
 
   return (
     <AuthContext.Provider
@@ -87,4 +89,4 @@ const AuthProvider = ({ children, history }) => {
   );
 };
 
-export default AuthProvider;
+export default withRouter(AuthProvider);

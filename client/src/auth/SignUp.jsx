@@ -16,10 +16,10 @@ const SignUp = () => {
       <label htmlFor="name">Name</label>
       <input type="text" name="name" ref={register} />
 
-      <label htmlFor="email">First Name</label>
+      <label htmlFor="email">Email</label>
       <input type="text" name="email" ref={register} />
 
-      <label htmlFor="password">Last Name</label>
+      <label htmlFor="password">Password</label>
       <input type="text" name="password" ref={register} />
 
       <button>{signUpLoading ? 'loading...' : 'Submit'}</button>
