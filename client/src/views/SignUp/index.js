@@ -1,6 +1,6 @@
 import * as React from 'react'
 import useForm from 'react-hook-form';
-import { AuthContext } from './AuthProvider';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const SignUp = () => {
   const { signUp, signUpLoading, signUpError } = React.useContext(AuthContext);

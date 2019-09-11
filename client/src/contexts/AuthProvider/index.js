@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { withRouter } from "react-router-dom";
-import { SIGN_UP_MUTATION, LOGIN_MUTATION } from '../mutations';
+import { SIGN_UP_MUTATION, LOGIN_MUTATION } from './mutations';
 import { getAuthToken, setAuthToken, removeAuthToken } from '../../utils/auth';
 
 export const AuthContext = React.createContext();

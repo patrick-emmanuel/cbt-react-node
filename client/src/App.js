@@ -1,10 +1,10 @@
 import React from 'react';
-import AuthProvider from './auth/AuthProvider';
-import PrivateRoute from './auth/PrivateRoute';
+import AuthProvider from './contexts/AuthProvider';
+import PrivateRoute from './components/PrivateRoute';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Login from './auth/Login';
-import SignUp from './auth/SignUp';
-import Home from './home';
+import Login from './views/Login';
+import SignUp from './views/SignUp';
+import Home from './views/Home';
 import './App.css';
 
 const App = () => {

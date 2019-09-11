@@ -1,6 +1,6 @@
 import * as React from 'react'
 import useForm from 'react-hook-form';
-import { AuthContext } from './AuthProvider';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const Login = () => {
   const { login, loginLoading, loginError } = React.useContext(AuthContext);
@@ -15,10 +15,10 @@ const Login = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       {loginError && 'An error occurred'}
 
-      <label htmlFor="email">First Name</label>
+      <label htmlFor="email">Email</label>
       <input type="text" name="email" ref={register} />
 
-      <label htmlFor="password">Last Name</label>
+      <label htmlFor="password">Password</label>
       <input type="text" name="password" ref={register} />
 
       <button>{loginLoading ? 'loading...' : 'Submit'}</button>
