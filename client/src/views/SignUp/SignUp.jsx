@@ -91,39 +91,38 @@ const useStyles = makeStyles(theme => ({
   title: {
     marginTop: theme.spacing(3)
   },
-  socialButtons: {
-    marginTop: theme.spacing(3)
-  },
-  socialIcon: {
-    marginRight: theme.spacing(1)
-  },
-  sugestion: {
-    marginTop: theme.spacing(2)
-  },
   textField: {
     marginTop: theme.spacing(2)
   },
-  signInButton: {
+  policy: {
+    marginTop: theme.spacing(1),
+    display: 'flex',
+    alignItems: 'center'
+  },
+  policyCheckbox: {
+    marginLeft: '-14px'
+  },
+  signUpButton: {
     margin: theme.spacing(2, 0)
   }
 }));
 
-const Login = props => {
+const SignUp = props => {
   const { history } = props;
 
-  const classes = useStyles();
-
-  const { login, loginLoading } = React.useContext(AuthContext);
+  const { signUp, signUpLoading, signUpError } = React.useContext(AuthContext);
   const { register, handleSubmit } = useForm();
+
+  const onSubmit = (values) => {
+    const { name, email, password } = values;
+    signUp({ variables: { name, email, password } });
+  }
+
+  const classes = useStyles();
 
   const handleBack = () => {
     history.goBack();
   };
-
-  const onSubmit = (values) => {
-    const { email, password } = values;
-    login({ variables: { email, password } });
-  }
 
   return (
     <div className={classes.root}>
@@ -183,48 +182,63 @@ const Login = props => {
                   className={classes.title}
                   variant="h2"
                 >
-                  Sign in
+                  Create new account
+                </Typography>
+                <Typography
+                  color="textSecondary"
+                  gutterBottom
+                >
+                  Use your email to create new account
                 </Typography>
                 <TextField
                   className={classes.textField}
                   fullWidth
-                  label="Email address"
-                  name="email"
+                  label="Name"
+                  name="name"
                   ref={register}
                   type="text"
                   variant="outlined"
-                />
+                />                
                 <TextField
-                  className={classes.textField}
-                  fullWidth
-                  label="Password"
-                  name="password"
-                  ref={register}
-                  type="password"
-                  variant="outlined"
-                />
+									className={classes.textField}
+									fullWidth
+									label="Email address"
+									name="email"
+									ref={register}
+									type="text"
+									variant="outlined"
+								/>
+								<TextField
+									className={classes.textField}
+									fullWidth
+									label="Password"
+									name="password"
+									ref={register}
+									type="password"
+									variant="outlined"
+								/>
                 <Button
-                  className={classes.signInButton}
+                  className={classes.signUpButton}
                   color="primary"
-                  disabled={loginLoading}
+                  disabled={signUpLoading}
                   fullWidth
                   size="large"
                   type="submit"
                   variant="contained"
                 >
-                  Sign in now
+                  Sign up now
                 </Button>
                 <Typography
                   color="textSecondary"
                   variant="body1"
                 >
-                  Don't have an account?{' '}
+                  Have an account?{' '}
                   <Link
                     component={RouterLink}
-                    to="/sign-up"
+                    to="/login"
                     variant="h6"
                   >
-                    Sign up
+                    Sign in
                   </Link>
                 </Typography>
               </form>
@@ -236,8 +250,8 @@ const Login = props => {
   );
 };
 
-Login.propTypes = {
+SignUp.propTypes = {
   history: PropTypes.object
 };
 
-export default withRouter(Login);
+export default withRouter(SignUp);
