@@ -6,7 +6,7 @@ import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
 
 import {
   Dashboard as DashboardView,
-  Assessment as AssessmentView,
+  AssessmentList as AssessmentView,
   NotFound as NotFoundView,
   SignUp as SignUpView,
   Login as LoginView,

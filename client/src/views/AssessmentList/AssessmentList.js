@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { makeStyles } from '@material-ui/styles';
 
 import { GET_ASSESSMENTS } from './query';
-import { UsersToolbar, AssessmentsTable } from './components';
+import { AssessmentsListToolbar, AssessmentsTable } from './components';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,7 +23,7 @@ const Assessment = () => {
 
   return (
     <div className={classes.root}>
-      <UsersToolbar />
+      <AssessmentsListToolbar />
       <div className={classes.content}>
         <AssessmentsTable assessments={data.tests} />
       </div>

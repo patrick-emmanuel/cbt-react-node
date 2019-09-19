@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Button } from '@material-ui/core';
+import { CustomLink } from 'components'
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -20,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const UsersToolbar = props => {
+const AssessmentsListToolbar = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
@@ -35,6 +36,8 @@ const UsersToolbar = props => {
         <Button
           color="primary"
           variant="contained"
+          component={CustomLink}
+          to="/new-assessment"
         >
           Add Assessment
         </Button>
@@ -43,8 +46,8 @@ const UsersToolbar = props => {
   );
 };
 
-UsersToolbar.propTypes = {
+AssessmentsListToolbar.propTypes = {
   className: PropTypes.string
 };
 
-export default UsersToolbar;
+export default AssessmentsListToolbar;

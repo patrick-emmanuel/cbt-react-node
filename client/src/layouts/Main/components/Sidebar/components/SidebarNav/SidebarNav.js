@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const CustomRouterLink = forwardRef((props, ref) => (
+const CustomRouterNavLink = forwardRef((props, ref) => (
   <div
     ref={ref}
     style={{ flexGrow: 1 }}
@@ -68,7 +68,7 @@ const SidebarNav = props => {
           <Button
             activeClassName={classes.active}
             className={classes.button}
-            component={CustomRouterLink}
+            component={CustomRouterNavLink}
             to={page.href}
           >
             <div className={classes.icon}>{page.icon}</div>
