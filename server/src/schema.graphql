@@ -32,6 +32,7 @@ type Query {
   filterPosts(searchString: String): [Post!]!
   me: User!
   post(id: ID): Post
+  tests(after: String, before: String, first: Int, last: Int, skip: Int): [Test!]
 }
 
 input QuestionCreateManyWithoutQuestionsInput {
@@ -71,9 +72,11 @@ input QuestionWhereUniqueInput {
 type Test {
   author: User
   content: String
+  createdAt: DateTime!
   id: ID!
   published: Boolean!
   title: String!
+  updatedAt: DateTime!
 }
 
 input TestCreateInput {
@@ -110,15 +113,14 @@ type User {
   email: String!
   id: ID!
   name: String
-  posts(after: String, before: String, first: Int, last: Int, skip: Int): [Post!]
 }
 
 input UserCreateOneWithoutAuthorInput {
   connect: UserWhereUniqueInput
-  create: UserCreateWithoutPostsInput
+  create: UserCreateWithoutPostInput
 }
 
-input UserCreateWithoutPostsInput {
+input UserCreateWithoutPostInput {
   email: String!
   id: ID
   name: String

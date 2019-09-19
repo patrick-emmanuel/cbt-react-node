@@ -61,5 +61,7 @@ export const Query = queryType({
         })
       },
     })
+
+    t.crud.tests()
   },
 })
