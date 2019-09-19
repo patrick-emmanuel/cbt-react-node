@@ -21,10 +21,37 @@ model Post {
   author    User?
 }
 
+model Test {
+  id        String   @default(cuid()) @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  published Boolean
+  title     String
+  content   String?
+  author    User?
+  questions Question[]
+}
+
+model Question {
+  id        String   @default(cuid()) @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  content   String
+  options   QuestionOption[]
+}
+
+model QuestionOption {
+  id        String   @default(cuid()) @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  content   String
+  correct   Boolean
+}
+
 model User {
   id       String  @default(cuid()) @id
   email    String  @unique
   password String
   name     String?
-  posts    Post[]
+  tests    Test[]
 }
