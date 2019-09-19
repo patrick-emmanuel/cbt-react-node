@@ -6,6 +6,7 @@ import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
 
 import {
   Dashboard as DashboardView,
+  Assessment as AssessmentView,
   NotFound as NotFoundView,
   SignUp as SignUpView,
   Login as LoginView,
@@ -24,6 +25,12 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/dashboard"
+      />
+      <RouteWithLayout
+        component={AssessmentView}
+        exact
+        layout={MainLayout}
+        path="/assessments"
       />
       <RouteWithLayout
         component={SignUpView}
