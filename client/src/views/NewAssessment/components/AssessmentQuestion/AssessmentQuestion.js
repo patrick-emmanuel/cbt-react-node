@@ -1,16 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import {
-  TextField,
-  Typography
+  Typography,
+  Button
 } from '@material-ui/core';
+import BuildQuestions from './BuildQuestions';
 
 const useStyles = makeStyles(theme => ({
 }));
 
 const AssessmentQuestion = ({ page }) => {
+  const [questions, setQuestions] = useState([]);
 
   const classes = useStyles();
+
+  const addQuestion = () => {
+    const questionsLength = questions.length + 1;
+    const question = {
+      question: {},
+      option2: {},
+      option3: {},
+      option4: {},
+      option5: {}
+    };
+
+    Object.keys(question).forEach((value, index) => {
+      if (value === 'question') {
+        question[value] = {
+          type: "text",
+          name: `question${questionsLength}`,
+          label: `Question ${questionsLength}`
+        }
+      } else {
+        question[value] = {
+          type: "text",
+          name: `question${questionsLength}option${index}`,
+          label: `Option ${index}`
+        }
+      }
+    });
+    question['id'] = questionsLength;
+    setQuestions(questions.concat([question]))
+  }
 
   if (page === 2) {
     return (
@@ -21,15 +52,15 @@ const AssessmentQuestion = ({ page }) => {
         >
           Set Questions
         </Typography>
-        <TextField
-          className={classes.textField}
-          fullWidth
-          label="Questions"
-          name="title"
-          type="text"
-          variant="outlined"
+        <BuildQuestions questions={questions} />
+        <Button
+          color="primary"
+          variant="contained"
           margin="normal"
-        />
+          onClick={addQuestion}
+        >
+          Add Question
+        </Button>
       </div>
     );
   }
