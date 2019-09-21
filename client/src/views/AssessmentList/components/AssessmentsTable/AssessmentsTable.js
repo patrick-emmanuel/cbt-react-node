@@ -71,8 +71,8 @@ const AssessmentsTable = props => {
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell>ID</TableCell>
                     <TableCell>Title</TableCell>
+                    <TableCell>Created At</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

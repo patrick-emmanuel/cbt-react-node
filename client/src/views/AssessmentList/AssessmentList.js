@@ -7,7 +7,7 @@ import { AssessmentsListToolbar, AssessmentsTable } from './components';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(3)
+    padding: theme.spacing(5)
   },
   content: {
     marginTop: theme.spacing(2)
