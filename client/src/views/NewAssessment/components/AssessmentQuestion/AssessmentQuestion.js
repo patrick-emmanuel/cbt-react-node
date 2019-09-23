@@ -7,6 +7,9 @@ import {
 import BuildQuestions from './BuildQuestions';
 
 const useStyles = makeStyles(theme => ({
+  addQuestionButton: {
+    marginTop: theme.spacing(2)
+  },
 }));
 
 const AssessmentQuestion = ({ page }) => {
@@ -57,6 +60,7 @@ const AssessmentQuestion = ({ page }) => {
           color="primary"
           variant="contained"
           margin="normal"
+          className={classes.addQuestionButton}
           onClick={addQuestion}
         >
           Add Question

@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import {
   TextField,
+  Grid,
 } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -16,16 +17,20 @@ const BuildOptions = ({ options }) => {
       const { type, label, name } = options[option];
       if (type === "text" && option.startsWith('option')) {
         return (
-          <TextField
-            key={name}
-            className={classes.textField}
-            fullWidth
-            label={label}
-            name={name}
-            type="text"
-            variant="outlined"
-            margin="normal"
-          />
+          <Grid
+            item
+            xs={6}
+          >
+            <TextField
+              key={name}
+              label={label}
+              name={name}
+              type="text"
+              fullWidth
+              variant="outlined"
+              margin="normal"
+            />
+          </Grid>
         )
       }
       return null;
