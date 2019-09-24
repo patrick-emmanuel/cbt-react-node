@@ -53,7 +53,7 @@ const AssessmentQuestion = ({ page }) => {
           className={classes.title}
           variant="h4"
         >
-          Set Questions
+          Questions
         </Typography>
         <BuildQuestions questions={questions} />
         <Button

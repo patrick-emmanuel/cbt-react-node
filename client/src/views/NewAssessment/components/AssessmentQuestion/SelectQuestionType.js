@@ -9,6 +9,7 @@ import {
   Radio,
 } from '@material-ui/core';
 import BuildOptions from './BuildOptions';
+import countOptions from 'helpers/countOptions';
 
 const useStyles = makeStyles(theme => ({
   formControl: {
@@ -35,14 +36,17 @@ const SelectQuestionType = ({ options }) => {
           <FormControlLabel value="selectOne" control={<Radio />} label="Select One" />
         </RadioGroup>
       </FormControl>
-      {questionType === 'selectMultiple' &&
-        <Grid
-          container
-          spacing={4}
-        >
-          <BuildOptions options={options} />
-        </Grid>
-      }
+      {questionType === 'selectMultiple' || questionType === 'selectOne' ? (
+        <div>
+          <Grid
+            container
+            spacing={4}
+          >
+            <BuildOptions options={options} />
+          </Grid>
+          <Select optionCount={countOptions(options)} />
+        </div>
+      ) : null}
     </div>
   )
 }
