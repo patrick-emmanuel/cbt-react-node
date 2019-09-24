@@ -25,10 +25,10 @@ const useStyles = makeStyles(theme => ({
 const NewAssessment = () => {
   const classes = useStyles();
   const [page, setPage] = useState(1);
+  const max = 2;
 
   const handleNext = (e) => {
     e.preventDefault();
-    const max = 2;
     const currentPage = Math.min(page + 1, max);
     setPage(currentPage);
   }
@@ -39,9 +39,9 @@ const NewAssessment = () => {
         <CardContent className={classes.content}>
           <div className={classes.inner}>
             <form className={classes.form}>
-              <AssessmentInfo page={page}/>
-              <AssessmentQuestion page={page}/>
-              <Button
+              <AssessmentInfo page={page} />
+              <AssessmentQuestion page={page} />
+              {page < max && <Button
                 className={classes.nextButton}
                 color="primary"
                 type="submit"
@@ -49,8 +49,8 @@ const NewAssessment = () => {
                 margin="normal"
                 onClick={handleNext}
               >
-                Next 
-              </Button>
+                Next
+              </Button>}
             </form>
           </div>
         </CardContent>
