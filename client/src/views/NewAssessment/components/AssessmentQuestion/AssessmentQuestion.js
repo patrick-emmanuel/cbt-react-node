@@ -9,7 +9,7 @@ import BuildQuestions from './BuildQuestions';
 const useStyles = makeStyles(theme => ({
   addQuestionButton: {
     marginTop: theme.spacing(2)
-  },
+  }
 }));
 
 const AssessmentQuestion = ({ page }) => {
