@@ -1,22 +1,35 @@
 import React from 'react';
 import {
-  FormControl, 
+  FormControl,
   MenuItem,
+  InputLabel,
+  Select
 } from '@material-ui/core';
 
 const SelectCorrectAnswer = ({ numberOfOptions }) => {
 
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(1);
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  }
 
   return (
     <div>
       <FormControl>
-        <InputLabel htmlFor="age-simple">Correct Answer</InputLabel>
+        <InputLabel htmlFor="correct-answer">Correct Answer</InputLabel>
         <Select
           value={value}
-          onChange={setValue}
+          onChange={handleChange}
+          inputProps={{
+            name: 'correct-answer',
+            id: 'correct-answer',
+          }}
         >
-          <MenuItem value={10}>Ten</MenuItem>
+          {[...new Array(numberOfOptions)].map((_, index) => {
+            const val = index + 1;
+            return <MenuItem key={val} value={val}>{val}</MenuItem>
+          })}
         </Select>
       </FormControl>
     </div>

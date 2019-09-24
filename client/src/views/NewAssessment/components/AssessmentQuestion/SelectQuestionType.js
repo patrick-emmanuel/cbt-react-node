@@ -9,6 +9,7 @@ import {
   Radio,
 } from '@material-ui/core';
 import BuildOptions from './BuildOptions';
+import SelectCorrectAnswer from './SelectCorrectAnswer';
 import countOptions from 'helpers/countOptions';
 
 const useStyles = makeStyles(theme => ({
@@ -44,7 +45,7 @@ const SelectQuestionType = ({ options }) => {
           >
             <BuildOptions options={options} />
           </Grid>
-          <Select optionCount={countOptions(options)} />
+          <SelectCorrectAnswer numberOfOptions={countOptions(options)} />
         </div>
       ) : null}
     </div>

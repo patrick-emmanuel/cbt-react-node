@@ -1,5 +1,5 @@
 export default (obj) => {
-  Object.keys(obj).reduce((accumulator, key) => {
+  return Object.keys(obj).reduce((accumulator, key) => {
     if (key.startsWith('option')) {
       return accumulator + 1;
     }
