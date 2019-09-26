@@ -1,36 +1,46 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import {
   FormControl,
-  MenuItem,
-  InputLabel,
-  Select
+  FormControlLabel,
+  FormLabel,
+  FormGroup,
+  Checkbox
 } from '@material-ui/core';
 
-const SelectCorrectAnswer = ({ numberOfOptions }) => {
+const useStyles = makeStyles(theme => ({
+  formControl: {
+    marginTop: theme.spacing(2),
+  },
+}));
 
-  const [value, setValue] = React.useState(1);
+const SelectCorrectAnswer = ({ answerOptions }) => {
 
-  const handleChange = (e) => {
-    setValue(e.target.value);
-  }
+  const classes = useStyles();
+  const [answerValues, setAnswerValues] = React.useState(answerOptions);
+
+  const handleChange = name => event => {
+    setAnswerValues({ ...answerValues, [name]: event.target.checked });
+  };
 
   return (
     <div>
-      <FormControl>
-        <InputLabel htmlFor="correct-answer">Correct Answer</InputLabel>
-        <Select
-          value={value}
-          onChange={handleChange}
-          inputProps={{
-            name: 'correct-answer',
-            id: 'correct-answer',
-          }}
-        >
-          {[...new Array(numberOfOptions)].map((_, index) => {
-            const val = index + 1;
-            return <MenuItem key={val} value={val}>{val}</MenuItem>
-          })}
-        </Select>
+      <FormControl component="fieldset" className={classes.formControl}>
+        <FormLabel component="legend">Select correct answers</FormLabel>
+        <FormGroup>
+          {Object.keys(answerOptions).map(numberInWords => (
+            <FormControlLabel
+              key={numberInWords}
+              control={
+              <Checkbox 
+                checked={answerValues[numberInWords]} 
+                onChange={handleChange(numberInWords)} 
+                value={numberInWords} />
+              }
+              label={numberInWords}
+            />
+          ))}
+        </FormGroup>
       </FormControl>
     </div>
   )

@@ -21,10 +21,10 @@ const AssessmentQuestion = ({ page }) => {
     const questionsLength = questions.length + 1;
     const question = {
       question: {},
+      option1: {},
       option2: {},
       option3: {},
-      option4: {},
-      option5: {}
+      option4: {}
     };
 
     Object.keys(question).forEach((value, index) => {

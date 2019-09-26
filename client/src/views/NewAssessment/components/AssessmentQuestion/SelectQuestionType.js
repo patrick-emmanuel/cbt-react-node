@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import BuildOptions from './BuildOptions';
 import SelectCorrectAnswer from './SelectCorrectAnswer';
-import countOptions from 'helpers/countOptions';
+import generateAnswerOptions from 'helpers/generateAnswerOptions';
 
 const useStyles = makeStyles(theme => ({
   formControl: {
@@ -33,11 +33,10 @@ const SelectQuestionType = ({ options }) => {
         <FormLabel component="legend">Question Type</FormLabel>
         <RadioGroup aria-label="questionType" name="questionType" value={questionType} onChange={handleQuestionTypeChange}>
           <FormControlLabel value="text" control={<Radio />} label="Text" />
-          <FormControlLabel value="selectMultiple" control={<Radio />} label="Select Multiple" />
-          <FormControlLabel value="selectOne" control={<Radio />} label="Select One" />
+          <FormControlLabel value="select" control={<Radio />} label="Select" />
         </RadioGroup>
       </FormControl>
-      {questionType === 'selectMultiple' || questionType === 'selectOne' ? (
+      {questionType === 'select' && (
         <div>
           <Grid
             container
@@ -45,9 +44,9 @@ const SelectQuestionType = ({ options }) => {
           >
             <BuildOptions options={options} />
           </Grid>
-          <SelectCorrectAnswer numberOfOptions={countOptions(options)} />
+          <SelectCorrectAnswer answerOptions={generateAnswerOptions(options)} />
         </div>
-      ) : null}
+      )}
     </div>
   )
 }
