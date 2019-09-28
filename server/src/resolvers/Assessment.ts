@@ -8,7 +8,7 @@ export const Assessment = objectType({
     t.model.updatedAt()
     t.model.published()
     t.model.title()
-    t.model.content()
+    t.model.description()
     t.model.author()
   },
 })

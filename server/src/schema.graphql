@@ -4,8 +4,8 @@
 
 type Assessment {
   author: User
-  content: String
   createdAt: DateTime!
+  description: String
   id: ID!
   published: Boolean!
   title: String!
@@ -14,8 +14,8 @@ type Assessment {
 
 input AssessmentCreateInput {
   author: UserCreateOneWithoutAuthorInput
-  content: String
   createdAt: DateTime
+  description: String
   id: ID
   published: Boolean!
   questions: QuestionCreateManyWithoutQuestionsInput
@@ -29,8 +29,8 @@ input AssessmentCreateManyWithoutAssessmentsInput {
 }
 
 input AssessmentCreateWithoutAuthorInput {
-  content: String
   createdAt: DateTime
+  description: String
   id: ID
   published: Boolean!
   questions: QuestionCreateManyWithoutQuestionsInput

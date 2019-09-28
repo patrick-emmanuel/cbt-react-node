@@ -22,8 +22,8 @@ declare global {
 export interface NexusGenInputs {
   AssessmentCreateInput: { // input type
     author?: NexusGenInputs['UserCreateOneWithoutAuthorInput'] | null; // UserCreateOneWithoutAuthorInput
-    content?: string | null; // String
     createdAt?: any | null; // DateTime
+    description?: string | null; // String
     id?: string | null; // ID
     published: boolean; // Boolean!
     questions?: NexusGenInputs['QuestionCreateManyWithoutQuestionsInput'] | null; // QuestionCreateManyWithoutQuestionsInput
@@ -35,8 +35,8 @@ export interface NexusGenInputs {
     create?: NexusGenInputs['AssessmentCreateWithoutAuthorInput'][] | null; // [AssessmentCreateWithoutAuthorInput!]
   }
   AssessmentCreateWithoutAuthorInput: { // input type
-    content?: string | null; // String
     createdAt?: any | null; // DateTime
+    description?: string | null; // String
     id?: string | null; // ID
     published: boolean; // Boolean!
     questions?: NexusGenInputs['QuestionCreateManyWithoutQuestionsInput'] | null; // QuestionCreateManyWithoutQuestionsInput
@@ -131,8 +131,8 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 export interface NexusGenFieldTypes {
   Assessment: { // field return type
     author: NexusGenRootTypes['User'] | null; // User
-    content: string | null; // String
     createdAt: any; // DateTime!
+    description: string | null; // String
     id: string; // ID!
     published: boolean; // Boolean!
     title: string; // String!
