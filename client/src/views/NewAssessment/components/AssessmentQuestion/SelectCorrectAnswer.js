@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const SelectCorrectAnswer = ({ answerOptions }) => {
+const SelectCorrectAnswer = ({ answerOptions, newAssessmentFormRef }) => {
 
   const classes = useStyles();
   const [answerValues, setAnswerValues] = React.useState(answerOptions);
@@ -33,6 +33,7 @@ const SelectCorrectAnswer = ({ answerOptions }) => {
               key={numberInWords}
               control={
               <Checkbox 
+                ref={newAssessmentFormRef}
                 checked={answerValues[numberInWords]} 
                 onChange={handleChange(numberInWords)} 
                 value={numberInWords} />

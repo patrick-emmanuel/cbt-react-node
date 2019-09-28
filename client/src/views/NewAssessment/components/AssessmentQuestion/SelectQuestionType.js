@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SelectQuestionType = ({ options }) => {
+const SelectQuestionType = ({ options, newAssessmentFormRef }) => {
   const classes = useStyles();
 
   const [questionType, setQuestionType] = React.useState('text');
@@ -31,7 +31,12 @@ const SelectQuestionType = ({ options }) => {
     <div>
       <FormControl component="fieldset" className={classes.formControl}>
         <FormLabel component="legend">Question Type</FormLabel>
-        <RadioGroup aria-label="questionType" name="questionType" value={questionType} onChange={handleQuestionTypeChange}>
+        <RadioGroup 
+          aria-label="questionType" 
+          name="questionType" 
+          value={questionType} 
+          onChange={handleQuestionTypeChange}
+        >
           <FormControlLabel value="text" control={<Radio />} label="Text" />
           <FormControlLabel value="select" control={<Radio />} label="Select" />
         </RadioGroup>
@@ -44,7 +49,10 @@ const SelectQuestionType = ({ options }) => {
           >
             <BuildOptions options={options} />
           </Grid>
-          <SelectCorrectAnswer answerOptions={generateAnswerOptions(options)} />
+          <SelectCorrectAnswer 
+            newAssessmentFormRef={newAssessmentFormRef} 
+            answerOptions={generateAnswerOptions(options)} 
+          />
         </div>
       )}
     </div>

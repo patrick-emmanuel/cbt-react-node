@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const BuildQuestions = ({ questions }) => {
+const BuildQuestions = ({ questions, newAssessmentFormRef }) => {
   const classes = useStyles();
 
   return (
@@ -29,12 +29,15 @@ const BuildQuestions = ({ questions }) => {
             <TextField
               fullWidth
               label={label}
+              ref={newAssessmentFormRef}
               name={name}
               type={type}
               variant="outlined"
               margin="normal"
             />
-            <SelectQuestionType options={options} />
+            <SelectQuestionType 
+              options={options}
+              newAssessmentFormRef={newAssessmentFormRef} />
           </Paper>
         </div>
       );

@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const AssessmentQuestion = ({ page }) => {
+const AssessmentQuestion = ({ page, newAssessmentFormRef }) => {
   const [questions, setQuestions] = useState([]);
 
   const classes = useStyles();
@@ -27,15 +27,15 @@ const AssessmentQuestion = ({ page }) => {
       option4: {}
     };
 
-    Object.keys(question).forEach((value, index) => {
-      if (value === 'question') {
-        question[value] = {
+    Object.keys(question).forEach((key, index) => {
+      if (key === 'question') {
+        question[key] = {
           type: "text",
           name: `question${questionsLength}`,
           label: `Question ${questionsLength}`
         }
       } else {
-        question[value] = {
+        question[key] = {
           type: "text",
           name: `question${questionsLength}option${index}`,
           label: `Option ${index}`
@@ -55,7 +55,10 @@ const AssessmentQuestion = ({ page }) => {
         >
           Questions
         </Typography>
-        <BuildQuestions questions={questions} />
+        <BuildQuestions 
+          questions={questions} 
+          newAssessmentFormRef={newAssessmentFormRef} 
+        />
         <Button
           color="primary"
           variant="contained"
