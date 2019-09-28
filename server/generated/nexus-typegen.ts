@@ -20,11 +20,37 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  AssessmentCreateInput: { // input type
+    author?: NexusGenInputs['UserCreateOneWithoutAuthorInput'] | null; // UserCreateOneWithoutAuthorInput
+    content?: string | null; // String
+    createdAt?: any | null; // DateTime
+    id?: string | null; // ID
+    published: boolean; // Boolean!
+    questions?: NexusGenInputs['QuestionCreateManyWithoutQuestionsInput'] | null; // QuestionCreateManyWithoutQuestionsInput
+    title: string; // String!
+    updatedAt?: any | null; // DateTime
+  }
+  AssessmentCreateManyWithoutAssessmentsInput: { // input type
+    connect?: NexusGenInputs['AssessmentWhereUniqueInput'][] | null; // [AssessmentWhereUniqueInput!]
+    create?: NexusGenInputs['AssessmentCreateWithoutAuthorInput'][] | null; // [AssessmentCreateWithoutAuthorInput!]
+  }
+  AssessmentCreateWithoutAuthorInput: { // input type
+    content?: string | null; // String
+    createdAt?: any | null; // DateTime
+    id?: string | null; // ID
+    published: boolean; // Boolean!
+    questions?: NexusGenInputs['QuestionCreateManyWithoutQuestionsInput'] | null; // QuestionCreateManyWithoutQuestionsInput
+    title: string; // String!
+    updatedAt?: any | null; // DateTime
+  }
+  AssessmentWhereUniqueInput: { // input type
+    id?: string | null; // ID
+  }
   QuestionCreateManyWithoutQuestionsInput: { // input type
     connect?: NexusGenInputs['QuestionWhereUniqueInput'][] | null; // [QuestionWhereUniqueInput!]
-    create?: NexusGenInputs['QuestionCreateWithoutTestInput'][] | null; // [QuestionCreateWithoutTestInput!]
+    create?: NexusGenInputs['QuestionCreateWithoutAssessmentInput'][] | null; // [QuestionCreateWithoutAssessmentInput!]
   }
-  QuestionCreateWithoutTestInput: { // input type
+  QuestionCreateWithoutAssessmentInput: { // input type
     content: string; // String!
     createdAt?: any | null; // DateTime
     id?: string | null; // ID
@@ -48,42 +74,16 @@ export interface NexusGenInputs {
   QuestionWhereUniqueInput: { // input type
     id?: string | null; // ID
   }
-  TestCreateInput: { // input type
-    author?: NexusGenInputs['UserCreateOneWithoutAuthorInput'] | null; // UserCreateOneWithoutAuthorInput
-    content?: string | null; // String
-    createdAt?: any | null; // DateTime
-    id?: string | null; // ID
-    published: boolean; // Boolean!
-    questions?: NexusGenInputs['QuestionCreateManyWithoutQuestionsInput'] | null; // QuestionCreateManyWithoutQuestionsInput
-    title: string; // String!
-    updatedAt?: any | null; // DateTime
-  }
-  TestCreateManyWithoutTestsInput: { // input type
-    connect?: NexusGenInputs['TestWhereUniqueInput'][] | null; // [TestWhereUniqueInput!]
-    create?: NexusGenInputs['TestCreateWithoutAuthorInput'][] | null; // [TestCreateWithoutAuthorInput!]
-  }
-  TestCreateWithoutAuthorInput: { // input type
-    content?: string | null; // String
-    createdAt?: any | null; // DateTime
-    id?: string | null; // ID
-    published: boolean; // Boolean!
-    questions?: NexusGenInputs['QuestionCreateManyWithoutQuestionsInput'] | null; // QuestionCreateManyWithoutQuestionsInput
-    title: string; // String!
-    updatedAt?: any | null; // DateTime
-  }
-  TestWhereUniqueInput: { // input type
-    id?: string | null; // ID
-  }
   UserCreateOneWithoutAuthorInput: { // input type
     connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
     create?: NexusGenInputs['UserCreateWithoutPostInput'] | null; // UserCreateWithoutPostInput
   }
   UserCreateWithoutPostInput: { // input type
+    assessments?: NexusGenInputs['AssessmentCreateManyWithoutAssessmentsInput'] | null; // AssessmentCreateManyWithoutAssessmentsInput
     email: string; // String!
     id?: string | null; // ID
     name?: string | null; // String
     password: string; // String!
-    tests?: NexusGenInputs['TestCreateManyWithoutTestsInput'] | null; // TestCreateManyWithoutTestsInput
   }
   UserWhereUniqueInput: { // input type
     email?: string | null; // String
@@ -95,6 +95,7 @@ export interface NexusGenEnums {
 }
 
 export interface NexusGenRootTypes {
+  Assessment: photon.Assessment;
   AuthPayload: { // root type
     token: string; // String!
     user: NexusGenRootTypes['User']; // User!
@@ -102,7 +103,6 @@ export interface NexusGenRootTypes {
   Mutation: {};
   Post: photon.Post;
   Query: {};
-  Test: photon.Test;
   User: photon.User;
   String: string;
   Int: number;
@@ -113,29 +113,38 @@ export interface NexusGenRootTypes {
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  AssessmentCreateInput: NexusGenInputs['AssessmentCreateInput'];
+  AssessmentCreateManyWithoutAssessmentsInput: NexusGenInputs['AssessmentCreateManyWithoutAssessmentsInput'];
+  AssessmentCreateWithoutAuthorInput: NexusGenInputs['AssessmentCreateWithoutAuthorInput'];
+  AssessmentWhereUniqueInput: NexusGenInputs['AssessmentWhereUniqueInput'];
   QuestionCreateManyWithoutQuestionsInput: NexusGenInputs['QuestionCreateManyWithoutQuestionsInput'];
-  QuestionCreateWithoutTestInput: NexusGenInputs['QuestionCreateWithoutTestInput'];
+  QuestionCreateWithoutAssessmentInput: NexusGenInputs['QuestionCreateWithoutAssessmentInput'];
   QuestionOptionCreateManyWithoutOptionsInput: NexusGenInputs['QuestionOptionCreateManyWithoutOptionsInput'];
   QuestionOptionCreateWithoutQuestionInput: NexusGenInputs['QuestionOptionCreateWithoutQuestionInput'];
   QuestionOptionWhereUniqueInput: NexusGenInputs['QuestionOptionWhereUniqueInput'];
   QuestionWhereUniqueInput: NexusGenInputs['QuestionWhereUniqueInput'];
-  TestCreateInput: NexusGenInputs['TestCreateInput'];
-  TestCreateManyWithoutTestsInput: NexusGenInputs['TestCreateManyWithoutTestsInput'];
-  TestCreateWithoutAuthorInput: NexusGenInputs['TestCreateWithoutAuthorInput'];
-  TestWhereUniqueInput: NexusGenInputs['TestWhereUniqueInput'];
   UserCreateOneWithoutAuthorInput: NexusGenInputs['UserCreateOneWithoutAuthorInput'];
   UserCreateWithoutPostInput: NexusGenInputs['UserCreateWithoutPostInput'];
   UserWhereUniqueInput: NexusGenInputs['UserWhereUniqueInput'];
 }
 
 export interface NexusGenFieldTypes {
+  Assessment: { // field return type
+    author: NexusGenRootTypes['User'] | null; // User
+    content: string | null; // String
+    createdAt: any; // DateTime!
+    id: string; // ID!
+    published: boolean; // Boolean!
+    title: string; // String!
+    updatedAt: any; // DateTime!
+  }
   AuthPayload: { // field return type
     token: string; // String!
     user: NexusGenRootTypes['User']; // User!
   }
   Mutation: { // field return type
     createDraft: NexusGenRootTypes['Post']; // Post!
-    createOneTest: NexusGenRootTypes['Test']; // Test!
+    createOneAssessment: NexusGenRootTypes['Assessment']; // Assessment!
     deletePost: NexusGenRootTypes['Post'] | null; // Post
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     publish: NexusGenRootTypes['Post'] | null; // Post
@@ -149,20 +158,11 @@ export interface NexusGenFieldTypes {
     title: string; // String!
   }
   Query: { // field return type
+    assessments: NexusGenRootTypes['Assessment'][] | null; // [Assessment!]
     feed: NexusGenRootTypes['Post'][]; // [Post!]!
     filterPosts: NexusGenRootTypes['Post'][]; // [Post!]!
     me: NexusGenRootTypes['User']; // User!
     post: NexusGenRootTypes['Post'] | null; // Post
-    tests: NexusGenRootTypes['Test'][] | null; // [Test!]
-  }
-  Test: { // field return type
-    author: NexusGenRootTypes['User'] | null; // User
-    content: string | null; // String
-    createdAt: any; // DateTime!
-    id: string; // ID!
-    published: boolean; // Boolean!
-    title: string; // String!
-    updatedAt: any; // DateTime!
   }
   User: { // field return type
     email: string; // String!
@@ -177,8 +177,8 @@ export interface NexusGenArgTypes {
       content?: string | null; // String
       title?: string | null; // String
     }
-    createOneTest: { // args
-      data: NexusGenInputs['TestCreateInput']; // TestCreateInput!
+    createOneAssessment: { // args
+      data: NexusGenInputs['AssessmentCreateInput']; // AssessmentCreateInput!
     }
     deletePost: { // args
       id?: string | null; // ID
@@ -197,18 +197,18 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
-    filterPosts: { // args
-      searchString?: string | null; // String
-    }
-    post: { // args
-      id?: string | null; // ID
-    }
-    tests: { // args
+    assessments: { // args
       after?: string | null; // String
       before?: string | null; // String
       first?: number | null; // Int
       last?: number | null; // Int
       skip?: number | null; // Int
+    }
+    filterPosts: { // args
+      searchString?: string | null; // String
+    }
+    post: { // args
+      id?: string | null; // ID
     }
   }
 }
@@ -218,9 +218,9 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "AuthPayload" | "Mutation" | "Post" | "Query" | "Test" | "User";
+export type NexusGenObjectNames = "Assessment" | "AuthPayload" | "Mutation" | "Post" | "Query" | "User";
 
-export type NexusGenInputNames = "QuestionCreateManyWithoutQuestionsInput" | "QuestionCreateWithoutTestInput" | "QuestionOptionCreateManyWithoutOptionsInput" | "QuestionOptionCreateWithoutQuestionInput" | "QuestionOptionWhereUniqueInput" | "QuestionWhereUniqueInput" | "TestCreateInput" | "TestCreateManyWithoutTestsInput" | "TestCreateWithoutAuthorInput" | "TestWhereUniqueInput" | "UserCreateOneWithoutAuthorInput" | "UserCreateWithoutPostInput" | "UserWhereUniqueInput";
+export type NexusGenInputNames = "AssessmentCreateInput" | "AssessmentCreateManyWithoutAssessmentsInput" | "AssessmentCreateWithoutAuthorInput" | "AssessmentWhereUniqueInput" | "QuestionCreateManyWithoutQuestionsInput" | "QuestionCreateWithoutAssessmentInput" | "QuestionOptionCreateManyWithoutOptionsInput" | "QuestionOptionCreateWithoutQuestionInput" | "QuestionOptionWhereUniqueInput" | "QuestionWhereUniqueInput" | "UserCreateOneWithoutAuthorInput" | "UserCreateWithoutPostInput" | "UserWhereUniqueInput";
 
 export type NexusGenEnumNames = never;
 

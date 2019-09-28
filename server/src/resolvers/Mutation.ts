@@ -73,26 +73,7 @@ export const Mutation = mutationType({
       },
     })
 
-    t.crud.createOneTest();
-
-    // t.field('createTest', {
-    //   type: 'Test',
-    //   args: {
-    //     title: stringArg(),
-    //     content: stringArg(),
-    //   },
-    //   resolve: (parent, { title, content }, ctx) => {
-    //     const userId = getUserId(ctx)
-    //     return ctx.photon.tests.create({
-    //       data: {
-    //         title,
-    //         content,
-    //         published: false,
-    //         author: { connect: { id: userId } },
-    //       },
-    //     })
-    //   },
-    // })
+    t.crud.createOneAssessment(),
 
     t.field('deletePost', {
       type: 'Post',

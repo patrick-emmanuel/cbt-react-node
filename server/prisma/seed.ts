@@ -7,7 +7,7 @@ async function main() {
       email: 'alice@prisma.io',
       name: 'Alice',
       password: '$2b$10$ZjONRZAxqX2pLoPax2xdcuzABTUEsFanQI6yBYCRtzpRiU4/X1uIu', // "graphql"
-      posts: {
+      assessments: {
         create: {
           title: 'Watch the talks from Prisma Day 2019',
           content: 'https://www.prisma.io/blog/z11sg6ipb3i1/',
@@ -21,7 +21,7 @@ async function main() {
       email: 'bob@prisma.io',
       name: 'Bob',
       password: '$2b$10$o6KioO.taArzboM44Ig85O3ZFZYZpR3XD7mI8T29eP4znU/.xyJbW', // "secret43"
-      posts: {
+      assessments: {
         create: [
           {
             title: 'Subscribe to GraphQL Weekly for community news',

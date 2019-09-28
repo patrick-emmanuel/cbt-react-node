@@ -2,6 +2,46 @@
 ### Do not make changes to this file directly
 
 
+type Assessment {
+  author: User
+  content: String
+  createdAt: DateTime!
+  id: ID!
+  published: Boolean!
+  title: String!
+  updatedAt: DateTime!
+}
+
+input AssessmentCreateInput {
+  author: UserCreateOneWithoutAuthorInput
+  content: String
+  createdAt: DateTime
+  id: ID
+  published: Boolean!
+  questions: QuestionCreateManyWithoutQuestionsInput
+  title: String!
+  updatedAt: DateTime
+}
+
+input AssessmentCreateManyWithoutAssessmentsInput {
+  connect: [AssessmentWhereUniqueInput!]
+  create: [AssessmentCreateWithoutAuthorInput!]
+}
+
+input AssessmentCreateWithoutAuthorInput {
+  content: String
+  createdAt: DateTime
+  id: ID
+  published: Boolean!
+  questions: QuestionCreateManyWithoutQuestionsInput
+  title: String!
+  updatedAt: DateTime
+}
+
+input AssessmentWhereUniqueInput {
+  id: ID
+}
+
 type AuthPayload {
   token: String!
   user: User!
@@ -12,7 +52,7 @@ scalar DateTime
 
 type Mutation {
   createDraft(content: String, title: String): Post!
-  createOneTest(data: TestCreateInput!): Test!
+  createOneAssessment(data: AssessmentCreateInput!): Assessment!
   deletePost(id: ID): Post
   login(email: String, password: String): AuthPayload!
   publish(id: ID): Post
@@ -28,19 +68,19 @@ type Post {
 }
 
 type Query {
+  assessments(after: String, before: String, first: Int, last: Int, skip: Int): [Assessment!]
   feed: [Post!]!
   filterPosts(searchString: String): [Post!]!
   me: User!
   post(id: ID): Post
-  tests(after: String, before: String, first: Int, last: Int, skip: Int): [Test!]
 }
 
 input QuestionCreateManyWithoutQuestionsInput {
   connect: [QuestionWhereUniqueInput!]
-  create: [QuestionCreateWithoutTestInput!]
+  create: [QuestionCreateWithoutAssessmentInput!]
 }
 
-input QuestionCreateWithoutTestInput {
+input QuestionCreateWithoutAssessmentInput {
   content: String!
   createdAt: DateTime
   id: ID
@@ -69,46 +109,6 @@ input QuestionWhereUniqueInput {
   id: ID
 }
 
-type Test {
-  author: User
-  content: String
-  createdAt: DateTime!
-  id: ID!
-  published: Boolean!
-  title: String!
-  updatedAt: DateTime!
-}
-
-input TestCreateInput {
-  author: UserCreateOneWithoutAuthorInput
-  content: String
-  createdAt: DateTime
-  id: ID
-  published: Boolean!
-  questions: QuestionCreateManyWithoutQuestionsInput
-  title: String!
-  updatedAt: DateTime
-}
-
-input TestCreateManyWithoutTestsInput {
-  connect: [TestWhereUniqueInput!]
-  create: [TestCreateWithoutAuthorInput!]
-}
-
-input TestCreateWithoutAuthorInput {
-  content: String
-  createdAt: DateTime
-  id: ID
-  published: Boolean!
-  questions: QuestionCreateManyWithoutQuestionsInput
-  title: String!
-  updatedAt: DateTime
-}
-
-input TestWhereUniqueInput {
-  id: ID
-}
-
 type User {
   email: String!
   id: ID!
@@ -121,11 +121,11 @@ input UserCreateOneWithoutAuthorInput {
 }
 
 input UserCreateWithoutPostInput {
+  assessments: AssessmentCreateManyWithoutAssessmentsInput
   email: String!
   id: ID
   name: String
   password: String!
-  tests: TestCreateManyWithoutTestsInput
 }
 
 input UserWhereUniqueInput {

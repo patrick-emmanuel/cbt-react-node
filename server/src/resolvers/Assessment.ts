@@ -1,7 +1,7 @@
 import { objectType } from 'nexus'
 
-export const Test = objectType({
-  name: 'Test',
+export const Assessment = objectType({
+  name: 'Assessment',
   definition(t) {
     t.model.id()
     t.model.createdAt()
