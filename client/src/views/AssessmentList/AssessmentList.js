@@ -25,7 +25,7 @@ const Assessment = () => {
     <div className={classes.root}>
       <AssessmentsListToolbar />
       <div className={classes.content}>
-        <AssessmentsTable assessments={data.tests} />
+        <AssessmentsTable assessments={data.assessments} />
       </div>
     </div>
   );
