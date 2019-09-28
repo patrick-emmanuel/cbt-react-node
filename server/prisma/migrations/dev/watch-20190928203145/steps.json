@@ -1,0 +1,26 @@
+{
+  "version": "0.2.33",
+  "steps": [
+    {
+      "stepType": "CreateField",
+      "model": "Question",
+      "name": "questionType",
+      "type": {
+        "Enum": "QuestionType"
+      },
+      "arity": "required",
+      "isUnique": false,
+      "default": {
+        "ConstantLiteral": "TEXT"
+      }
+    },
+    {
+      "stepType": "CreateEnum",
+      "name": "QuestionType",
+      "values": [
+        "TEXT",
+        "SELECT"
+      ]
+    }
+  ]
+}

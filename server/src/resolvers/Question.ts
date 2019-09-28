@@ -1,14 +1,13 @@
 import { objectType } from 'nexus'
 
-export const Post = objectType({
-  name: 'Post',
+export const Question = objectType({
+  name: 'Question',
   definition(t) {
     t.model.id()
     t.model.createdAt()
     t.model.updatedAt()
-    t.model.published()
-    t.model.title()
     t.model.content()
-    t.model.author()
+    // t.model.questionType()
+    // t.model.options()
   },
 })

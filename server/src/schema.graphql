@@ -62,9 +62,11 @@ type Mutation {
 type Post {
   author: User
   content: String
+  createdAt: DateTime!
   id: ID!
   published: Boolean!
   title: String!
+  updatedAt: DateTime!
 }
 
 type Query {
@@ -85,7 +87,16 @@ input QuestionCreateWithoutAssessmentInput {
   createdAt: DateTime
   id: ID
   options: QuestionOptionCreateManyWithoutOptionsInput
+  questionType: QuestionType
   updatedAt: DateTime
+}
+
+type QuestionOption {
+  content: String!
+  correct: Boolean!
+  createdAt: DateTime!
+  id: ID!
+  updatedAt: DateTime!
 }
 
 input QuestionOptionCreateManyWithoutOptionsInput {
@@ -103,6 +114,11 @@ input QuestionOptionCreateWithoutQuestionInput {
 
 input QuestionOptionWhereUniqueInput {
   id: ID
+}
+
+enum QuestionType {
+  SELECT
+  TEXT
 }
 
 input QuestionWhereUniqueInput {

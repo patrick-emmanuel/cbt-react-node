@@ -10,5 +10,6 @@ export const Assessment = objectType({
     t.model.title()
     t.model.description()
     t.model.author()
+    // t.model.questions()
   },
 })

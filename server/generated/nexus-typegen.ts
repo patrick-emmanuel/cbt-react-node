@@ -55,6 +55,7 @@ export interface NexusGenInputs {
     createdAt?: any | null; // DateTime
     id?: string | null; // ID
     options?: NexusGenInputs['QuestionOptionCreateManyWithoutOptionsInput'] | null; // QuestionOptionCreateManyWithoutOptionsInput
+    questionType?: NexusGenEnums['QuestionType'] | null; // QuestionType
     updatedAt?: any | null; // DateTime
   }
   QuestionOptionCreateManyWithoutOptionsInput: { // input type
@@ -92,6 +93,7 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  QuestionType: photon.QuestionType
 }
 
 export interface NexusGenRootTypes {
@@ -103,6 +105,7 @@ export interface NexusGenRootTypes {
   Mutation: {};
   Post: photon.Post;
   Query: {};
+  QuestionOption: photon.QuestionOption;
   User: photon.User;
   String: string;
   Int: number;
@@ -126,6 +129,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   UserCreateOneWithoutAuthorInput: NexusGenInputs['UserCreateOneWithoutAuthorInput'];
   UserCreateWithoutPostInput: NexusGenInputs['UserCreateWithoutPostInput'];
   UserWhereUniqueInput: NexusGenInputs['UserWhereUniqueInput'];
+  QuestionType: NexusGenEnums['QuestionType'];
 }
 
 export interface NexusGenFieldTypes {
@@ -153,9 +157,11 @@ export interface NexusGenFieldTypes {
   Post: { // field return type
     author: NexusGenRootTypes['User'] | null; // User
     content: string | null; // String
+    createdAt: any; // DateTime!
     id: string; // ID!
     published: boolean; // Boolean!
     title: string; // String!
+    updatedAt: any; // DateTime!
   }
   Query: { // field return type
     assessments: NexusGenRootTypes['Assessment'][] | null; // [Assessment!]
@@ -163,6 +169,13 @@ export interface NexusGenFieldTypes {
     filterPosts: NexusGenRootTypes['Post'][]; // [Post!]!
     me: NexusGenRootTypes['User']; // User!
     post: NexusGenRootTypes['Post'] | null; // Post
+  }
+  QuestionOption: { // field return type
+    content: string; // String!
+    correct: boolean; // Boolean!
+    createdAt: any; // DateTime!
+    id: string; // ID!
+    updatedAt: any; // DateTime!
   }
   User: { // field return type
     email: string; // String!
@@ -218,11 +231,11 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Assessment" | "AuthPayload" | "Mutation" | "Post" | "Query" | "User";
+export type NexusGenObjectNames = "Assessment" | "AuthPayload" | "Mutation" | "Post" | "Query" | "QuestionOption" | "User";
 
 export type NexusGenInputNames = "AssessmentCreateInput" | "AssessmentCreateManyWithoutAssessmentsInput" | "AssessmentCreateWithoutAuthorInput" | "AssessmentWhereUniqueInput" | "QuestionCreateManyWithoutQuestionsInput" | "QuestionCreateWithoutAssessmentInput" | "QuestionOptionCreateManyWithoutOptionsInput" | "QuestionOptionCreateWithoutQuestionInput" | "QuestionOptionWhereUniqueInput" | "QuestionWhereUniqueInput" | "UserCreateOneWithoutAuthorInput" | "UserCreateWithoutPostInput" | "UserWhereUniqueInput";
 
-export type NexusGenEnumNames = never;
+export type NexusGenEnumNames = "QuestionType";
 
 export type NexusGenInterfaceNames = never;
 
