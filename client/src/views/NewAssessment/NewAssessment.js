@@ -25,22 +25,21 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const NewAssessment = () => {
+const NewAssessment = ({ history }) => {
   const classes = useStyles();
   const [assessmentInfo, setAssessmentInfo] = useState({
     title: '',
     description: ''
   });
-
   const { register, handleSubmit } = useForm();
   const [addAssessment, {
     loading: createAssessmentLoading }
   ] = useMutation(CREATE_ASSESSMENT);
-
   const [page, setPage] = useState(1);
   const max = 2;
 
   const handleChange = (e) => {
+    e.persist();
     setAssessmentInfo(assessmentInfo => ({
       ...assessmentInfo,
       [e.target.name]: e.target.value
@@ -105,6 +104,7 @@ const NewAssessment = () => {
         }
       }
     });
+    history.push('/assessments')
   }
 
   return (

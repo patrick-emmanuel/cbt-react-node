@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const AssessmentQuestion = ({ history, page, register, createAssessmentLoading }) => {
+const AssessmentQuestion = ({ page, register, createAssessmentLoading }) => {
   const [questions, setQuestions] = useState([]);
 
   const classes = useStyles();
@@ -33,10 +33,6 @@ const AssessmentQuestion = ({ history, page, register, createAssessmentLoading }
       option3: {},
       option4: {}
     };
-
-    const gotoAssessments = () => {
-      history.push('/assessments')
-    }
 
     Object.keys(question).forEach((key, index) => {
       if (key === 'question') {
@@ -81,15 +77,15 @@ const AssessmentQuestion = ({ history, page, register, createAssessmentLoading }
             Add Question
           </Button>
           {questions.length > 0 &&
-            <Button
+            <Button 
               color="secondary"
               type="submit"
               variant="contained"
               margin="normal"
               className={classes.submitButton}
             >
-              {createAssessmentLoading ? 'Loading...' : 'Submit'}
-            </Button>}
+              {createAssessmentLoading ? 'Loading' : 'Submit' }
+          </Button>}
         </div>
       </div>
     );

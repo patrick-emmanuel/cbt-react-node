@@ -10,10 +10,8 @@ const useStyles = makeStyles(theme => ({
 
 const AssessmentInfo = ({ 
   page,
-  title, 
-  description, 
-  onTitleChange, 
-  onDescriptionChange 
+  assessmentInfo,
+  handleChange
 }) => {
 
   const classes = useStyles();
@@ -32,8 +30,8 @@ const AssessmentInfo = ({
           fullWidth
           label="Title"
           name="title"
-          value={title}
-          onChange={onTitleChange}
+          value={assessmentInfo.title}
+          onChange={handleChange}
           type="text"
           variant="outlined"
           margin="normal"
@@ -42,8 +40,8 @@ const AssessmentInfo = ({
           fullWidth
           label="Description"
           name="description"
-          value={description}
-          onChange={onDescriptionChange}
+          value={assessmentInfo.description}
+          onChange={handleChange}
           multiline
           margin="normal"
           rows="4"
