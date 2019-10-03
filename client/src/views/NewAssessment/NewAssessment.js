@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const NewAssessment = ({ history }) => {
+const NewAssessment = () => {
   const classes = useStyles();
   const [assessmentInfo, setAssessmentInfo] = useState({
     title: '',
@@ -33,7 +33,10 @@ const NewAssessment = ({ history }) => {
   });
 
   const { register, handleSubmit } = useForm();
-  const [addAssessment] = useMutation(CREATE_ASSESSMENT);
+  const [addAssessment, {
+    loading: createAssessmentLoading }
+  ] = useMutation(CREATE_ASSESSMENT);
+
   const [page, setPage] = useState(1);
   const max = 2;
 
@@ -102,7 +105,6 @@ const NewAssessment = ({ history }) => {
         }
       }
     });
-    history.push('/assessments')
   }
 
   return (
@@ -122,6 +124,7 @@ const NewAssessment = ({ history }) => {
               <AssessmentQuestion
                 page={page}
                 register={register}
+                createAssessmentLoading={createAssessmentLoading}
               />
               {page < max && <Button
                 className={classes.nextButton}
