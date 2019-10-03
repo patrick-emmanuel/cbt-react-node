@@ -25,14 +25,24 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const NewAssessment = () => {
+const NewAssessment = ({ history }) => {
   const classes = useStyles();
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
+  const [assessmentInfo, setAssessmentInfo] = useState({
+    title: '',
+    description: ''
+  });
+
   const { register, handleSubmit } = useForm();
   const [addAssessment] = useMutation(CREATE_ASSESSMENT);
   const [page, setPage] = useState(1);
   const max = 2;
+
+  const handleChange = (e) => {
+    setAssessmentInfo(assessmentInfo => ({
+      ...assessmentInfo,
+      [e.target.name]: e.target.value
+    }));
+  }
 
   const handleNext = (e) => {
     e.preventDefault();
@@ -40,10 +50,7 @@ const NewAssessment = () => {
     setPage(currentPage);
   }
 
-  const onSubmit = (questions) => {
-    const authorId = localStorage.getItem('userId');
-    debugger;
-
+  const formatQuestions = (questions) => {
     const create = Object.keys(questions).map(key => {
       const question = questions[key];
       if (question.questionType === "SELECT") {
@@ -73,7 +80,13 @@ const NewAssessment = () => {
       }
       return { content: question.content }
     })
+    return create;
+  }
 
+  const onSubmit = (questions) => {
+    const authorId = localStorage.getItem('userId');
+    const create = formatQuestions(questions);
+    const { title, description } = assessmentInfo;
     addAssessment({
       variables: {
         data: {
@@ -89,6 +102,7 @@ const NewAssessment = () => {
         }
       }
     });
+    history.push('/assessments')
   }
 
   return (
@@ -102,10 +116,8 @@ const NewAssessment = () => {
             >
               <AssessmentInfo
                 page={page}
-                title={title}
-                description={description}
-                onDescriptionChange={e => setDescription(e.target.value)}
-                onTitleChange={e => setTitle(e.target.value)}
+                assessmentInfo={assessmentInfo}
+                handleChange={handleChange}
               />
               <AssessmentQuestion
                 page={page}
