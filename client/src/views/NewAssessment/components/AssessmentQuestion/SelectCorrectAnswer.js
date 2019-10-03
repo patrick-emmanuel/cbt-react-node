@@ -14,13 +14,20 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const SelectCorrectAnswer = ({ answerOptions, newAssessmentFormRef }) => {
+const SelectCorrectAnswer = ({ answerOptions, register }) => {
 
   const classes = useStyles();
   const [answerValues, setAnswerValues] = React.useState(answerOptions);
 
-  const handleChange = name => event => {
-    setAnswerValues({ ...answerValues, [name]: event.target.checked });
+  const handleChange = optionId => event => {
+    debugger;
+    setAnswerValues({
+      ...answerValues,
+      [optionId]: {
+        ...answerValues[optionId],
+        value: event.target.checked
+      }
+    });
   };
 
   return (
@@ -28,19 +35,25 @@ const SelectCorrectAnswer = ({ answerOptions, newAssessmentFormRef }) => {
       <FormControl component="fieldset" className={classes.formControl}>
         <FormLabel component="legend">Select correct answers</FormLabel>
         <FormGroup>
-          {Object.keys(answerOptions).map(numberInWords => (
-            <FormControlLabel
-              key={numberInWords}
-              control={
-              <Checkbox 
-                ref={newAssessmentFormRef}
-                checked={answerValues[numberInWords]} 
-                onChange={handleChange(numberInWords)} 
-                value={numberInWords} />
-              }
-              label={numberInWords}
-            />
-          ))}
+          {Object.keys(answerValues).map(optionId => {
+            const { name, label, value } = answerValues[optionId];
+            return (
+              <div key={name}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      inputRef={register}
+                      checked={value}
+                      onChange={handleChange(optionId)}
+                      value={value}
+                      name={name}
+                    />
+                  }
+                  label={label}
+                />
+              </div>
+            )
+          })}
         </FormGroup>
       </FormControl>
     </div>

@@ -25,11 +25,6 @@ const useStyles = makeStyles(theme => ({
   inner: {
     minWidth: 1050
   },
-  titleContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
   noContentContainer: {
     display: 'flex',
     alignItems: 'center',
@@ -72,6 +67,7 @@ const AssessmentsTable = props => {
                 <TableHead>
                   <TableRow>
                     <TableCell>Title</TableCell>
+                    <TableCell>Description</TableCell>
                     <TableCell>Created At</TableCell>
                   </TableRow>
                 </TableHead>
@@ -83,9 +79,10 @@ const AssessmentsTable = props => {
                       key={assessment.id}
                     >
                       <TableCell>
-                        <div className={classes.titleContainer}>
-                          <Typography variant="body1">{assessment.title}</Typography>
-                        </div>
+                        <Typography variant="body1">{assessment.title}</Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="body1">{assessment.description}</Typography>
                       </TableCell>
                       <TableCell>
                         {moment(assessment.createdAt).format('DD/MM/YYYY')}

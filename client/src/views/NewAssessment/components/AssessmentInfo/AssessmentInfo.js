@@ -8,7 +8,13 @@ import {
 const useStyles = makeStyles(theme => ({
 }));
 
-const AssessmentInfo = ({ page, newAssessmentFormRef }) => {
+const AssessmentInfo = ({ 
+  page,
+  title, 
+  description, 
+  onTitleChange, 
+  onDescriptionChange 
+}) => {
 
   const classes = useStyles();
 
@@ -26,7 +32,8 @@ const AssessmentInfo = ({ page, newAssessmentFormRef }) => {
           fullWidth
           label="Title"
           name="title"
-          ref={newAssessmentFormRef}
+          value={title}
+          onChange={onTitleChange}
           type="text"
           variant="outlined"
           margin="normal"
@@ -35,7 +42,8 @@ const AssessmentInfo = ({ page, newAssessmentFormRef }) => {
           fullWidth
           label="Description"
           name="description"
-          ref={newAssessmentFormRef}
+          value={description}
+          onChange={onDescriptionChange}
           multiline
           margin="normal"
           rows="4"

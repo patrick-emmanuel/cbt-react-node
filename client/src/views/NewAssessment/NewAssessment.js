@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 import {
   Button,
   Card,
-  CardContent,
+  CardContent
 } from '@material-ui/core';
 import { AssessmentInfo, AssessmentQuestion } from './components';
 import { CREATE_ASSESSMENT } from './mutation';
@@ -27,8 +27,10 @@ const useStyles = makeStyles(theme => ({
 
 const NewAssessment = () => {
   const classes = useStyles();
-  const { newAssessmentFormRef, handleSubmit } = useForm();
-  const [addAssessment, { data }] = useMutation(CREATE_ASSESSMENT);
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const { register, handleSubmit } = useForm();
+  const [addAssessment] = useMutation(CREATE_ASSESSMENT);
   const [page, setPage] = useState(1);
   const max = 2;
 
@@ -38,29 +40,52 @@ const NewAssessment = () => {
     setPage(currentPage);
   }
 
-  const onSubmit = (values) => {
+  const onSubmit = (questions) => {
+    const authorId = localStorage.getItem('userId');
+    debugger;
+
+    const create = Object.keys(questions).map(key => {
+      const question = questions[key];
+      if (question.questionType === "SELECT") {
+        return {
+          content: question.content,
+          options: {
+            create: [
+              {
+                content: question.option1.content,
+                correct: !!question.option1.correct
+              },
+              {
+                content: question.option2.content,
+                correct: !!question.option2.correct
+              },
+              {
+                content: question.option3.content,
+                correct: !!question.option3.correct
+              },
+              {
+                content: question.option4.content,
+                correct: !!question.option4.correct
+              }
+            ]
+          }
+        }
+      }
+      return { content: question.content }
+    })
+
     addAssessment({
       variables: {
-        author: {
-          connect: {
-            id: '' //current user.id
-          }
-        },
-        title: values.title,
-        description: values.description,
-        published: false,
-        questions: {
-          create: [
-            {
-              content: values.questionContent,
-              options: {
-                create: {
-                  content: values.options.content,
-                  correct: false,
-                }
-              }
+        data: {
+          author: {
+            connect: {
+              id: authorId
             }
-          ]
+          },
+          title,
+          description,
+          published: false,
+          questions: { create }
         }
       }
     });
@@ -71,9 +96,21 @@ const NewAssessment = () => {
       <Card>
         <CardContent className={classes.content}>
           <div className={classes.inner}>
-            <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
-              <AssessmentInfo page={page} newAssessmentFormRef={newAssessmentFormRef}/>
-              <AssessmentQuestion page={page} newAssessmentFormRef={newAssessmentFormRef}/>
+            <form
+              className={classes.form}
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              <AssessmentInfo
+                page={page}
+                title={title}
+                description={description}
+                onDescriptionChange={e => setDescription(e.target.value)}
+                onTitleChange={e => setTitle(e.target.value)}
+              />
+              <AssessmentQuestion
+                page={page}
+                register={register}
+              />
               {page < max && <Button
                 className={classes.nextButton}
                 color="primary"
@@ -83,7 +120,8 @@ const NewAssessment = () => {
                 onClick={handleNext}
               >
                 Next
-              </Button>}
+              </Button>
+              }
             </form>
           </div>
         </CardContent>

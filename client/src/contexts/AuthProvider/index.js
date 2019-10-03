@@ -19,6 +19,8 @@ const AuthProvider = ({ children, history }) => {
 
   const authenticate = (token, user) => {
     setAuthToken(token)
+    // Implement verify user here. Should not save user id.
+    localStorage.setItem('userId', user.id);
     setUser(user);
     history.replace('/');
   };

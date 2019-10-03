@@ -190,7 +190,7 @@ const Login = props => {
                   fullWidth
                   label="Email address"
                   name="email"
-                  ref={register}
+                  inputRef={register}
                   type="text"
                   variant="outlined"
                 />
@@ -199,7 +199,7 @@ const Login = props => {
                   fullWidth
                   label="Password"
                   name="password"
-                  ref={register}
+                  inputRef={register}
                   type="password"
                   variant="outlined"
                 />

@@ -5,7 +5,7 @@ export const GET_ASSESSMENTS = gql`
     assessments {
       id
       title
-      content
+      description
       createdAt
     }
   }

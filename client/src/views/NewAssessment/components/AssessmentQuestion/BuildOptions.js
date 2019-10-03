@@ -1,16 +1,10 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/styles';
 import {
   TextField,
   Grid,
 } from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({
-}));
-
-const BuildOptions = ({ options }) => {
-
-  const classes = useStyles();
+const BuildOptions = ({ options, register, questionNumber }) => {
 
   return (
     Object.keys(options).map(option => {
@@ -24,7 +18,8 @@ const BuildOptions = ({ options }) => {
             <TextField
               key={name}
               label={label}
-              name={name}
+              name={`${questionNumber}.${option}.content`}
+              inputRef={register}
               type="text"
               fullWidth
               variant="outlined"

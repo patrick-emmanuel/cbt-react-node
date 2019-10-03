@@ -110,10 +110,11 @@ const useStyles = makeStyles(theme => ({
 const SignUp = props => {
   const { history } = props;
 
-  const { signUp, signUpLoading, signUpError } = React.useContext(AuthContext);
+  const { signUp, signUpLoading } = React.useContext(AuthContext);
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (values) => {
+    debugger;
     const { name, email, password } = values;
     signUp({ variables: { name, email, password } });
   }
@@ -195,7 +196,7 @@ const SignUp = props => {
                   fullWidth
                   label="Name"
                   name="name"
-                  ref={register}
+                  inputRef={register}
                   type="text"
                   variant="outlined"
                 />                
@@ -204,7 +205,7 @@ const SignUp = props => {
 									fullWidth
 									label="Email address"
 									name="email"
-									ref={register}
+									inputRef={register}
 									type="text"
 									variant="outlined"
 								/>
@@ -213,7 +214,7 @@ const SignUp = props => {
 									fullWidth
 									label="Password"
 									name="password"
-									ref={register}
+									inputRef={register}
 									type="password"
 									variant="outlined"
 								/>

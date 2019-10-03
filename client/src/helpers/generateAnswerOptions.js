@@ -13,11 +13,17 @@ const map = {
 
 export default (obj) => {
   const options = Object.keys(obj);
+  const questionId = obj['id'];
   const answerOptions = options.reduce((accumulator, key) => {
     if (key.startsWith('option')) {
       const number = Number(key[key.length - 1])
-      const nummberInWords = map[number]
-      accumulator[nummberInWords] = false;
+      const numberInWords = map[number];
+      const optionId = `question${questionId}.option${number}.correct`;
+      accumulator[optionId] = {
+        name: optionId,
+        value: false,
+        label: numberInWords
+      }
       return accumulator;
     }
     return accumulator;

@@ -8,11 +8,18 @@ import BuildQuestions from './BuildQuestions';
 
 const useStyles = makeStyles(theme => ({
   addQuestionButton: {
+    marginTop: theme.spacing(2),
+    marginRight: theme.spacing(2)
+  },
+  submitButton: {
+    marginTop: theme.spacing(2),
+  },
+  manageButtons: {
     marginTop: theme.spacing(2)
   }
 }));
 
-const AssessmentQuestion = ({ page, newAssessmentFormRef }) => {
+const AssessmentQuestion = ({ page, register }) => {
   const [questions, setQuestions] = useState([]);
 
   const classes = useStyles();
@@ -37,7 +44,7 @@ const AssessmentQuestion = ({ page, newAssessmentFormRef }) => {
       } else {
         question[key] = {
           type: "text",
-          name: `question${questionsLength}option${index}`,
+          name: `question${questionsLength}.option${index}`,
           label: `Option ${index}`
         }
       }
@@ -55,19 +62,31 @@ const AssessmentQuestion = ({ page, newAssessmentFormRef }) => {
         >
           Questions
         </Typography>
-        <BuildQuestions 
-          questions={questions} 
-          newAssessmentFormRef={newAssessmentFormRef} 
+        <BuildQuestions
+          questions={questions}
+          register={register}
         />
-        <Button
-          color="primary"
-          variant="contained"
-          margin="normal"
-          className={classes.addQuestionButton}
-          onClick={addQuestion}
-        >
-          Add Question
-        </Button>
+        <div className={classes.manageButtons}>
+          <Button
+            color="primary"
+            variant="contained"
+            margin="normal"
+            className={classes.addQuestionButton}
+            onClick={addQuestion}
+          >
+            Add Question
+          </Button>
+          {questions.length > 0 &&
+            <Button
+              color="secondary"
+              type="submit"
+              variant="contained"
+              margin="normal"
+              className={classes.submitButton}
+            >
+              Submit
+          </Button>}
+        </div>
       </div>
     );
   }

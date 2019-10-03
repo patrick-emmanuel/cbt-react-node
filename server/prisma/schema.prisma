@@ -27,8 +27,8 @@ model Assessment {
   updatedAt DateTime @updatedAt
   published Boolean
   title     String
-  description   String?
-  author    User?
+  description   String
+  author    User
   questions Question[]
 }
 

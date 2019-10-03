@@ -18,10 +18,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SelectQuestionType = ({ options, newAssessmentFormRef }) => {
+const SelectQuestionType = ({ options, register, questionNumber }) => {
   const classes = useStyles();
 
-  const [questionType, setQuestionType] = React.useState('text');
+  const [questionType, setQuestionType] = React.useState('TEXT');
 
   const handleQuestionTypeChange = event => {
     setQuestionType(event.target.value);
@@ -33,24 +33,36 @@ const SelectQuestionType = ({ options, newAssessmentFormRef }) => {
         <FormLabel component="legend">Question Type</FormLabel>
         <RadioGroup 
           aria-label="questionType" 
-          name="questionType" 
-          value={questionType} 
+          name={`${questionNumber}.questionType`} 
+          value={questionType}
           onChange={handleQuestionTypeChange}
         >
-          <FormControlLabel value="text" control={<Radio />} label="Text" />
-          <FormControlLabel value="select" control={<Radio />} label="Select" />
+          <FormControlLabel
+            value="TEXT"
+            control={<Radio inputRef={register} />} 
+            label="Text" 
+          />
+          <FormControlLabel 
+            value="SELECT" 
+            control={<Radio inputRef={register} />} 
+            label="Select" 
+          />
         </RadioGroup>
       </FormControl>
-      {questionType === 'select' && (
+      {questionType === 'SELECT' && (
         <div>
           <Grid
             container
             spacing={4}
           >
-            <BuildOptions options={options} />
+            <BuildOptions
+              questionNumber={questionNumber}
+              register={register} 
+              options={options} 
+            />
           </Grid>
           <SelectCorrectAnswer 
-            newAssessmentFormRef={newAssessmentFormRef} 
+            register={register}
             answerOptions={generateAnswerOptions(options)} 
           />
         </div>
