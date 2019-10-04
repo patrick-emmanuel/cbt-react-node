@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
+import { withRouter } from "react-router"
 import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { makeStyles } from '@material-ui/styles';
@@ -39,7 +40,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const AssessmentsTable = props => {
-  const { className, assessments, ...rest } = props;
+  const { className, history, assessments, ...rest } = props;
 
   const classes = useStyles();
 
@@ -55,7 +56,6 @@ const AssessmentsTable = props => {
   };
 
   const handleAssessmentClick = (id) => {
-    const { history } = props;
     history.push(`/assessments/${id}`)
   }
 
@@ -129,4 +129,4 @@ AssessmentsTable.propTypes = {
   assessments: PropTypes.array.isRequired
 };
 
-export default AssessmentsTable;
+export default withRouter(AssessmentsTable);
