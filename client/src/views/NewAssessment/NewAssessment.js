@@ -55,31 +55,24 @@ const NewAssessment = ({ history }) => {
   const formatQuestions = (questions) => {
     const create = Object.keys(questions).map(key => {
       const question = questions[key];
+      const optionsCreate = Object.keys(question)
+        .filter(key => key.startsWith('option'))
+        .map(key => {
+          const option = question[key];
+          return {
+            content: option.content,
+            correct: !!option.correct
+          }
+        });
       if (question.questionType === "SELECT") {
         return {
           content: question.content,
           options: {
-            create: [
-              {
-                content: question.option1.content,
-                correct: !!question.option1.correct
-              },
-              {
-                content: question.option2.content,
-                correct: !!question.option2.correct
-              },
-              {
-                content: question.option3.content,
-                correct: !!question.option3.correct
-              },
-              {
-                content: question.option4.content,
-                correct: !!question.option4.correct
-              }
-            ]
+            create: optionsCreate
           }
         }
       }
+      debugger;
       return { content: question.content }
     })
     return create;
@@ -104,7 +97,8 @@ const NewAssessment = ({ history }) => {
         }
       }
     });
-    history.push('/assessments')
+    // transition when 'addAssessment' is done loading
+    // history.push('/assessments')
   }
 
   return (
