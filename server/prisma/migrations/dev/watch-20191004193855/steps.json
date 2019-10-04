@@ -1,0 +1,17 @@
+{
+  "version": "0.2.33",
+  "steps": [
+    {
+      "stepType": "UpdateField",
+      "model": "Assessment",
+      "name": "author",
+      "arity": "required"
+    },
+    {
+      "stepType": "UpdateField",
+      "model": "Assessment",
+      "name": "description",
+      "arity": "required"
+    }
+  ]
+}

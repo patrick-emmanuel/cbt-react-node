@@ -54,7 +54,12 @@ const AssessmentsTable = props => {
     setRowsPerPage(event.target.value);
   };
 
-  if(assessments.length > 0) {
+  const handleAssessmentClick = (id) => {
+    const { history } = props;
+    history.push(`/assessments/${id}`)
+  }
+
+  if (assessments.length > 0) {
     return (
       <Card
         {...rest}
@@ -77,6 +82,7 @@ const AssessmentsTable = props => {
                       className={classes.tableRow}
                       hover
                       key={assessment.id}
+                      onClick={() => handleAssessmentClick(assessment.id)}
                     >
                       <TableCell>
                         <Typography variant="body1">{assessment.title}</Typography>

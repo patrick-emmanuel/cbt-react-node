@@ -164,6 +164,7 @@ export interface NexusGenFieldTypes {
     updatedAt: any; // DateTime!
   }
   Query: { // field return type
+    assessment: NexusGenRootTypes['Assessment'] | null; // Assessment
     assessments: NexusGenRootTypes['Assessment'][] | null; // [Assessment!]
     feed: NexusGenRootTypes['Post'][]; // [Post!]!
     filterPosts: NexusGenRootTypes['Post'][]; // [Post!]!
@@ -210,6 +211,9 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    assessment: { // args
+      where: NexusGenInputs['AssessmentWhereUniqueInput']; // AssessmentWhereUniqueInput!
+    }
     assessments: { // args
       after?: string | null; // String
       before?: string | null; // String

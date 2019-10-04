@@ -70,6 +70,7 @@ type Post {
 }
 
 type Query {
+  assessment(where: AssessmentWhereUniqueInput!): Assessment
   assessments(after: String, before: String, first: Int, last: Int, skip: Int): [Assessment!]
   feed: [Post!]!
   filterPosts(searchString: String): [Post!]!
