@@ -7,6 +7,13 @@ export const GET_ASSESSMENT = gql`
       title
       description
       createdAt
+      questions(first: 10) {
+        content
+        options(first: 10) {
+          content
+          correct
+        }
+      }
     }
   }
 `;

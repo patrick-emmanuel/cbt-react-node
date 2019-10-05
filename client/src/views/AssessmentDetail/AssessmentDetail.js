@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Button,
 } from '@material-ui/core';
@@ -7,8 +7,9 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import { GET_ASSESSMENT } from './query';
 import { DELETE_ASSESSMENT } from './mutation';
 
-const AssessmentDetail = ({ match }) => {
+const AssessmentDetail = ({ match, history }) => {
   const [deleteAssessment, {
+    data: deleteAssesmentData,
     loading: deletingAssessment }
   ] = useMutation(DELETE_ASSESSMENT);
 
@@ -20,6 +21,7 @@ const AssessmentDetail = ({ match }) => {
     }
   });
 
+
   const handleDeleteAssessment = () => {
     deleteAssessment({
       variables: {
@@ -30,6 +32,13 @@ const AssessmentDetail = ({ match }) => {
     });
   }
 
+  useEffect(() => {
+    if (deleteAssesmentData && !deletingAssessment) {
+      history.push('/assessments')
+    }
+  }, [deleteAssesmentData, deletingAssessment]);
+
+
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
 
@@ -39,6 +48,16 @@ const AssessmentDetail = ({ match }) => {
       <p>{data.assessment.title}</p>
       <p>{data.assessment.description}</p>
       <p>{data.assessment.createdAt}</p>
+      {data.assessment.questions && data.assessment.questions.map(question => (
+        <div key={question.content}>
+          <p>{question.content}</p>
+          {question.options.map(option => (
+            <p key={option.content}>
+              {option.content}{option.correct && 'Answer!'}
+            </p>
+          ))}
+        </div>
+      ))}
       <Button
         color="primary"
         variant="contained"

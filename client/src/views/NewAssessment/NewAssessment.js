@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useForm from 'react-hook-form';
 import { useMutation } from '@apollo/react-hooks';
 import { makeStyles } from '@material-ui/styles';
@@ -33,6 +33,7 @@ const NewAssessment = ({ history }) => {
   });
   const { register, handleSubmit } = useForm();
   const [addAssessment, {
+    data,
     loading: createAssessmentLoading }
   ] = useMutation(CREATE_ASSESSMENT);
   const [page, setPage] = useState(1);
@@ -72,7 +73,6 @@ const NewAssessment = ({ history }) => {
           }
         }
       }
-      debugger;
       return { content: question.content }
     })
     return create;
@@ -97,9 +97,13 @@ const NewAssessment = ({ history }) => {
         }
       }
     });
-    // transition when 'addAssessment' is done loading
-    // history.push('/assessments')
   }
+
+  useEffect(() => {
+    if (data && !createAssessmentLoading) {
+      history.push('/assessments')
+    }
+  }, [data, createAssessmentLoading]);
 
   return (
     <div className={classes.root}>
