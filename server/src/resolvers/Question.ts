@@ -8,6 +8,6 @@ export const Question = objectType({
     t.model.updatedAt()
     t.model.content()
     // t.model.questionType()
-    // t.model.options()
+    t.model.options()
   },
 })

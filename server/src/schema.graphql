@@ -8,6 +8,7 @@ type Assessment {
   description: String!
   id: ID!
   published: Boolean!
+  questions(after: String, before: String, first: Int, last: Int, skip: Int): [Question!]
   title: String!
   updatedAt: DateTime!
 }
@@ -75,6 +76,14 @@ type Query {
   filterPosts(searchString: String): [Post!]!
   me: User!
   post(id: ID): Post
+}
+
+type Question {
+  content: String!
+  createdAt: DateTime!
+  id: ID!
+  options(after: String, before: String, first: Int, last: Int, skip: Int): [QuestionOption!]
+  updatedAt: DateTime!
 }
 
 input QuestionCreateManyWithoutQuestionsInput {

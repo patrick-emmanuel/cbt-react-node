@@ -105,6 +105,7 @@ export interface NexusGenRootTypes {
   Mutation: {};
   Post: photon.Post;
   Query: {};
+  Question: photon.Question;
   QuestionOption: photon.QuestionOption;
   User: photon.User;
   String: string;
@@ -139,6 +140,7 @@ export interface NexusGenFieldTypes {
     description: string; // String!
     id: string; // ID!
     published: boolean; // Boolean!
+    questions: NexusGenRootTypes['Question'][] | null; // [Question!]
     title: string; // String!
     updatedAt: any; // DateTime!
   }
@@ -170,6 +172,13 @@ export interface NexusGenFieldTypes {
     me: NexusGenRootTypes['User']; // User!
     post: NexusGenRootTypes['Post'] | null; // Post
   }
+  Question: { // field return type
+    content: string; // String!
+    createdAt: any; // DateTime!
+    id: string; // ID!
+    options: NexusGenRootTypes['QuestionOption'][] | null; // [QuestionOption!]
+    updatedAt: any; // DateTime!
+  }
   QuestionOption: { // field return type
     content: string; // String!
     correct: boolean; // Boolean!
@@ -185,6 +194,15 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenArgTypes {
+  Assessment: {
+    questions: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      skip?: number | null; // Int
+    }
+  }
   Mutation: {
     createOneAssessment: { // args
       data: NexusGenInputs['AssessmentCreateInput']; // AssessmentCreateInput!
@@ -223,6 +241,15 @@ export interface NexusGenArgTypes {
       id?: string | null; // ID
     }
   }
+  Question: {
+    options: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      skip?: number | null; // Int
+    }
+  }
 }
 
 export interface NexusGenAbstractResolveReturnTypes {
@@ -230,7 +257,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Assessment" | "AuthPayload" | "Mutation" | "Post" | "Query" | "QuestionOption" | "User";
+export type NexusGenObjectNames = "Assessment" | "AuthPayload" | "Mutation" | "Post" | "Query" | "Question" | "QuestionOption" | "User";
 
 export type NexusGenInputNames = "AssessmentCreateInput" | "AssessmentCreateManyWithoutAssessmentsInput" | "AssessmentCreateWithoutAuthorInput" | "AssessmentWhereUniqueInput" | "QuestionCreateManyWithoutQuestionsInput" | "QuestionCreateWithoutAssessmentInput" | "QuestionOptionCreateManyWithoutOptionsInput" | "QuestionOptionCreateWithoutQuestionInput" | "QuestionOptionWhereUniqueInput" | "QuestionWhereUniqueInput" | "UserCreateOneWithoutAuthorInput" | "UserCreateWithoutPostInput" | "UserWhereUniqueInput";
 
