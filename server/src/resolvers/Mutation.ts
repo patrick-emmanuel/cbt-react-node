@@ -54,43 +54,30 @@ export const Mutation = mutationType({
       },
     })
 
-    t.field('createDraft', {
-      type: 'Post',
-      args: {
-        title: stringArg(),
-        content: stringArg({ nullable: true }),
-      },
-      resolve: (parent, { title, content }, ctx) => {
-        const userId = getUserId(ctx)
-        return ctx.photon.posts.create({
-          data: {
-            title,
-            content,
-            published: false,
-            author: { connect: { id: userId } },
-          },
-        })
-      },
-    })
+    // t.field('createDraft', {
+    //   type: 'Assessment',
+    //   args: {
+    //     title: stringArg({ nullable: true }),
+    //     description: stringArg({ nullable: true }),
+    //   },
+    //   resolve: (parent, { title, description }, ctx) => {
+    //     const authorId = getUserId(ctx)
+    //     return ctx.photon.assessments.create({
+    //       data: {
+    //         title,
+    //         description,
+    //         published: false,
+    //         author: { connect: { id: authorId } },
+    //       },
+    //     })
+    //   },
+    // })
 
     t.crud.createOneAssessment(),
     t.crud.deleteOneAssessment(),
 
-    t.field('deletePost', {
-      type: 'Post',
-      nullable: true,
-      args: { id: idArg() },
-      resolve: (parent, { id }, ctx) => {
-        return ctx.photon.posts.delete({
-          where: {
-            id,
-          },
-        })
-      },
-    })
-
     t.field('publish', {
-      type: 'Post',
+      type: 'Assessment',
       nullable: true,
       args: { id: idArg() },
       resolve: (parent, { id }, ctx) => {
