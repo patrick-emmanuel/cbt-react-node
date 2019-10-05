@@ -53,6 +53,7 @@ scalar DateTime
 type Mutation {
   createDraft(content: String, title: String): Post!
   createOneAssessment(data: AssessmentCreateInput!): Assessment!
+  deleteOneAssessment(where: AssessmentWhereUniqueInput!): Assessment
   deletePost(id: ID): Post
   login(email: String, password: String): AuthPayload!
   publish(id: ID): Post

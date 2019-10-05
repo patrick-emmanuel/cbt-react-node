@@ -74,6 +74,7 @@ export const Mutation = mutationType({
     })
 
     t.crud.createOneAssessment(),
+    t.crud.deleteOneAssessment(),
 
     t.field('deletePost', {
       type: 'Post',

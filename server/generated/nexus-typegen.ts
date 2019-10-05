@@ -149,6 +149,7 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     createDraft: NexusGenRootTypes['Post']; // Post!
     createOneAssessment: NexusGenRootTypes['Assessment']; // Assessment!
+    deleteOneAssessment: NexusGenRootTypes['Assessment'] | null; // Assessment
     deletePost: NexusGenRootTypes['Post'] | null; // Post
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     publish: NexusGenRootTypes['Post'] | null; // Post
@@ -193,6 +194,9 @@ export interface NexusGenArgTypes {
     }
     createOneAssessment: { // args
       data: NexusGenInputs['AssessmentCreateInput']; // AssessmentCreateInput!
+    }
+    deleteOneAssessment: { // args
+      where: NexusGenInputs['AssessmentWhereUniqueInput']; // AssessmentWhereUniqueInput!
     }
     deletePost: { // args
       id?: string | null; // ID

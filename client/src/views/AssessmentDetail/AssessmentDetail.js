@@ -18,6 +18,9 @@ const AssessmentDetail = ({ match }) => {
   return (
     <div>
       <p>{data.assessment.id}</p>
+      <p>{data.assessment.title}</p>
+      <p>{data.assessment.description}</p>
+      <p>{data.assessment.createdAt}</p>
     </div>
   );
 };
