@@ -8,7 +8,7 @@ const rules = {
   }),
   isPostOwner: rule()(async (parent, { id }, context) => {
     const userId = getUserId(context)
-    const author = await context.photon.posts
+    const author = await context.photon.assessments
       .findOne({
         where: {
           id,
@@ -26,8 +26,8 @@ export const permissions = shield({
     post: rules.isAuthenticatedUser,
   },
   Mutation: {
-    createDraft: rules.isAuthenticatedUser,
-    deletePost: rules.isPostOwner,
+    // createDraft: rules.isAuthenticatedUser,
+    deleteOneAssessment: rules.isPostOwner,
     publish: rules.isPostOwner,
   },
 })

@@ -147,12 +147,10 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User']; // User!
   }
   Mutation: { // field return type
-    createDraft: NexusGenRootTypes['Post']; // Post!
     createOneAssessment: NexusGenRootTypes['Assessment']; // Assessment!
     deleteOneAssessment: NexusGenRootTypes['Assessment'] | null; // Assessment
-    deletePost: NexusGenRootTypes['Post'] | null; // Post
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
-    publish: NexusGenRootTypes['Post'] | null; // Post
+    publish: NexusGenRootTypes['Assessment'] | null; // Assessment
     signup: NexusGenRootTypes['AuthPayload']; // AuthPayload!
   }
   Post: { // field return type
@@ -188,18 +186,11 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenArgTypes {
   Mutation: {
-    createDraft: { // args
-      content?: string | null; // String
-      title?: string | null; // String
-    }
     createOneAssessment: { // args
       data: NexusGenInputs['AssessmentCreateInput']; // AssessmentCreateInput!
     }
     deleteOneAssessment: { // args
       where: NexusGenInputs['AssessmentWhereUniqueInput']; // AssessmentWhereUniqueInput!
-    }
-    deletePost: { // args
-      id?: string | null; // ID
     }
     login: { // args
       email?: string | null; // String
