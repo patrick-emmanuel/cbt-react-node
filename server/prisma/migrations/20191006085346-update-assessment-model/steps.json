@@ -1,0 +1,53 @@
+{
+  "version": "0.2.33",
+  "steps": [
+    {
+      "stepType": "CreateField",
+      "model": "Assessment",
+      "name": "description",
+      "type": {
+        "Base": "String"
+      },
+      "arity": "optional",
+      "isUnique": false
+    },
+    {
+      "stepType": "DeleteField",
+      "model": "Assessment",
+      "name": "content"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Question",
+      "name": "questionType",
+      "type": {
+        "Enum": "QuestionType"
+      },
+      "arity": "required",
+      "isUnique": false,
+      "default": {
+        "ConstantLiteral": "TEXT"
+      }
+    },
+    {
+      "stepType": "CreateEnum",
+      "name": "QuestionType",
+      "values": [
+        "TEXT",
+        "SELECT"
+      ]
+    },
+    {
+      "stepType": "UpdateField",
+      "model": "Assessment",
+      "name": "author",
+      "arity": "required"
+    },
+    {
+      "stepType": "UpdateField",
+      "model": "Assessment",
+      "name": "description",
+      "arity": "required"
+    }
+  ]
+}

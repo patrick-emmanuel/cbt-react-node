@@ -35,16 +35,16 @@ const Routes = () => {
         path="/assessments"
       />
       <RouteWithLayout
-        component={AssessmentDetailView}
-        exact
-        layout={MainLayout}
-        path="/assessments/:id"
-      />
-      <RouteWithLayout
         component={NewAssessmentView}
         exact
         layout={MainLayout}
         path="/assessments/new"
+      />
+      <RouteWithLayout
+        component={AssessmentDetailView}
+        exact
+        layout={MainLayout}
+        path="/assessments/:id"
       />
       <RouteWithLayout
         component={SignUpView}
