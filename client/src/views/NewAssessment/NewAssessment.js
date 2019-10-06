@@ -32,10 +32,12 @@ const NewAssessment = ({ history }) => {
     description: ''
   });
   const { register, handleSubmit } = useForm();
+
   const [addAssessment, {
     data,
     loading: createAssessmentLoading }
   ] = useMutation(CREATE_ASSESSMENT);
+
   const [page, setPage] = useState(1);
   const max = 2;
 
@@ -103,7 +105,7 @@ const NewAssessment = ({ history }) => {
     if (data && !createAssessmentLoading) {
       history.push('/assessments')
     }
-  }, [data, createAssessmentLoading]);
+  }, [data, createAssessmentLoading, history]);
 
   return (
     <div className={classes.root}>

@@ -36,7 +36,7 @@ const AssessmentDetail = ({ match, history }) => {
     if (deleteAssesmentData && !deletingAssessment) {
       history.push('/assessments')
     }
-  }, [deleteAssesmentData, deletingAssessment]);
+  }, [deleteAssesmentData, deletingAssessment, history]);
 
 
   if (loading) return 'Loading...';
