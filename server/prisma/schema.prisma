@@ -59,5 +59,11 @@ model User {
   email    String  @unique
   password String
   name     String?
+  role UserRole @default(STUDENT)
   assessments    Assessment[]
+}
+
+enum UserRole {
+  STUDENT
+  ADMIN
 }

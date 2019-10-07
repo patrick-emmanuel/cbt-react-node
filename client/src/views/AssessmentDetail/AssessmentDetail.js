@@ -8,7 +8,7 @@ import {
   Typography
 } from '@material-ui/core';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import CheckCircleOutline from '@material-ui/icons/CheckCircleOutline';
+import CheckCircle from '@material-ui/icons/CheckCircle';
 import {
   QuestionStat,
 } from './components';
@@ -119,7 +119,7 @@ const AssessmentDetail = ({ match, history }) => {
                     <Typography>
                       {option.content}
                     </Typography>
-                    {option.correct && <CheckCircleOutline className={classes.checkmarkIcon}/>}
+                    {option.correct && <CheckCircle className={classes.checkmarkIcon}/>}
                   </div>
                 ))}
               </div>
