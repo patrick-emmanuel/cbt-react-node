@@ -1,0 +1,26 @@
+{
+  "version": "0.2.33",
+  "steps": [
+    {
+      "stepType": "CreateField",
+      "model": "User",
+      "name": "role",
+      "type": {
+        "Enum": "UserRole"
+      },
+      "arity": "required",
+      "isUnique": false,
+      "default": {
+        "ConstantLiteral": "STUDENT"
+      }
+    },
+    {
+      "stepType": "CreateEnum",
+      "name": "UserRole",
+      "values": [
+        "STUDENT",
+        "ADMIN"
+      ]
+    }
+  ]
+}
