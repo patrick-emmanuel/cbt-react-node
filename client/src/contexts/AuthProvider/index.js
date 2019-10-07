@@ -41,7 +41,7 @@ const AuthProvider = ({ children, history }) => {
         authenticate(token, user);
       },
       onError(error) {
-        removeAuthToken();
+        // removeAuthToken();
         console.log(error);
       }
     }
@@ -61,8 +61,9 @@ const AuthProvider = ({ children, history }) => {
         const { user, token } = data.login;
         authenticate(token, user);
       },
-      onError() {
-        removeAuthToken();
+      onError(error) {
+        // removeAuthToken();
+        console.log(error);
       }
     }
   );
@@ -71,14 +72,14 @@ const AuthProvider = ({ children, history }) => {
     VERIFY_TOKEN_MUTATION,
     {
       onCompleted(data) {
-        const result = data.verifyToken;
-        if (result && result.user && result.token) {
-          const { token, user } = result;
-          authenticate(token, user);
+        if (data.verifyToken.user && data.verifyToken.token) {
+          const { user } = data.verifyToken;
+          setUser(user);
         }
       },
-      onError() {
-        removeAuthToken();
+      onError(error) {
+        // removeAuthToken();
+        console.log(error);
       }
     }
   );
@@ -86,9 +87,9 @@ const AuthProvider = ({ children, history }) => {
   React.useEffect(() => {
     const userToken = loginData && loginData.login ? loginData.login.token : token;
     if (userToken && !user) {
-      verifyToken({ token: userToken });
+      verifyToken({ variables: { token: userToken } });
     }
-  }, [login, loginData, token, user]);
+  }, [verifyToken, loginData, token, user]);
 
   return (
     <AuthContext.Provider
