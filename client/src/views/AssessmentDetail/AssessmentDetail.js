@@ -2,9 +2,13 @@ import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import {
   Button,
-  Grid
+  Grid,
+  Card,
+  CardContent,
+  Typography
 } from '@material-ui/core';
 import { useQuery, useMutation } from '@apollo/react-hooks';
+import CheckCircleOutline from '@material-ui/icons/CheckCircleOutline';
 import {
   QuestionStat,
 } from './components';
@@ -13,7 +17,28 @@ import { DELETE_ASSESSMENT } from './mutation';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(4)
+    padding: theme.spacing(5)
+  },
+  card: {
+    marginTop: theme.spacing(5)
+  },
+  question: {
+    marginTop: theme.spacing(4)
+  },
+  checkmarkIcon: {
+    color: theme.palette.success.main,
+    marginLeft: theme.spacing(1)
+  },
+  option: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+    display: 'flex',
+    alignItems: 'center'
+  },
+  deleteButton: {
+    margin: theme.spacing(2),
+    background: theme.palette.error.main,
+    color: theme.palette.white
   }
 }));
 
@@ -73,27 +98,43 @@ const AssessmentDetail = ({ match, history }) => {
           />
         </Grid>
       </Grid>
-      <p>{data.assessment.title}</p>
-      <p>{data.assessment.description}</p>
-      <p>{data.assessment.createdAt}</p>
-      {data.assessment.questions && data.assessment.questions.map(question => (
-        <div key={question.content}>
-          <p>{question.content}</p>
-          {question.options.map(option => (
-            <p key={option.content}>
-              {option.content}{option.correct && 'Answer!'}
-            </p>
-          ))}
-        </div>
-      ))}
-      <Button
-        color="primary"
-        variant="contained"
-        margin="normal"
-        onClick={handleDeleteAssessment}
-      >
-        Delete Assesment
-      </Button>
+      <Card className={classes.card}>
+        <CardContent>
+          <Typography variant="h3">
+            {data.assessment.title}
+          </Typography>
+          <Typography>{data.assessment.description}</Typography>
+          <div>
+            {data.assessment.questions && 
+              data.assessment.questions.map((question, index) => (
+              <div 
+                className={classes.question} 
+                key={question.content}
+              >
+                <Typography variant="h5">
+                  {index + 1}. {question.content}
+                </Typography>
+                {question.options.map(option => (
+                  <div className={classes.option}>
+                    <Typography>
+                      {option.content}
+                    </Typography>
+                    {option.correct && <CheckCircleOutline className={classes.checkmarkIcon}/>}
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </CardContent>
+        <Button
+          variant="contained"
+          margin="normal"
+          className={classes.deleteButton}
+          onClick={handleDeleteAssessment}
+        >
+          Delete Assesment
+        </Button>
+      </Card>
     </div>
   );
 };
