@@ -1,13 +1,26 @@
 import React, { useEffect } from 'react';
+import { makeStyles } from '@material-ui/styles';
 import {
   Button,
+  Grid
 } from '@material-ui/core';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-
+import {
+  QuestionStat,
+} from './components';
 import { GET_ASSESSMENT } from './query';
 import { DELETE_ASSESSMENT } from './mutation';
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    padding: theme.spacing(4)
+  }
+}));
+
 const AssessmentDetail = ({ match, history }) => {
+
+  const classes = useStyles();
+
   const [deleteAssessment, {
     data: deleteAssesmentData,
     loading: deletingAssessment }
@@ -43,8 +56,23 @@ const AssessmentDetail = ({ match, history }) => {
   if (error) return `Error! ${error.message}`;
 
   return (
-    <div>
-      <p>{data.assessment.id}</p>
+    <div className={classes.root}>
+      <Grid
+        container
+        spacing={4}
+      >
+        <Grid
+          item
+          lg={3}
+          sm={6}
+          xl={3}
+          xs={12}
+        >
+          <QuestionStat 
+            assessment={data.assessment} 
+          />
+        </Grid>
+      </Grid>
       <p>{data.assessment.title}</p>
       <p>{data.assessment.description}</p>
       <p>{data.assessment.createdAt}</p>
