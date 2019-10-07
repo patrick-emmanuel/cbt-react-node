@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { withRouter } from "react-router-dom";
-import { SIGN_UP_MUTATION, LOGIN_MUTATION } from './mutations';
+import {
+  SIGN_UP_MUTATION,
+  LOGIN_MUTATION,
+  VERIFY_TOKEN_MUTATION
+} from './mutations';
 import { getAuthToken, setAuthToken, removeAuthToken } from '../../utils/auth';
 
 export const AuthContext = React.createContext();
@@ -19,8 +23,6 @@ const AuthProvider = ({ children, history }) => {
 
   const authenticate = (token, user) => {
     setAuthToken(token)
-    // Implement verify user here. Should not save user id.
-    localStorage.setItem('userId', user.id);
     setUser(user);
     history.replace('/');
   };
@@ -59,7 +61,23 @@ const AuthProvider = ({ children, history }) => {
         const { user, token } = data.login;
         authenticate(token, user);
       },
-      onError(error) {
+      onError() {
+        removeAuthToken();
+      }
+    }
+  );
+
+  const [verifyToken] = useMutation(
+    VERIFY_TOKEN_MUTATION,
+    {
+      onCompleted(data) {
+        const result = data.verifyToken;
+        if (result && result.user && result.token) {
+          const { token, user } = result;
+          authenticate(token, user);
+        }
+      },
+      onError() {
         removeAuthToken();
       }
     }
@@ -67,9 +85,8 @@ const AuthProvider = ({ children, history }) => {
 
   React.useEffect(() => {
     const userToken = loginData && loginData.login ? loginData.login.token : token;
-    if (userToken && !login && !user) {
-      // verifyUser({ token: userToken });
-      console.log('Verify token');
+    if (userToken && !user) {
+      verifyToken({ token: userToken });
     }
   }, [login, loginData, token, user]);
 
