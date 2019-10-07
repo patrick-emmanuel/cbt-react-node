@@ -8,7 +8,7 @@ import AssessmentIcon from '@material-ui/icons/Assessment';
 import PeopleIcon from '@material-ui/icons/People';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SettingsIcon from '@material-ui/icons/Settings';
-
+import { AuthContext } from 'contexts/AuthProvider';
 import { Profile, SidebarNav } from './components';
 
 const useStyles = makeStyles(theme => ({
@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
 
 const Sidebar = props => {
   const { open, variant, onClose, className, ...rest } = props;
-
+  const { user } = React.useContext(AuthContext);
   const classes = useStyles();
 
   const pages = [
@@ -47,7 +47,7 @@ const Sidebar = props => {
     },
     {
       title: 'Assessments',
-      href: '/assessments',
+      href: user.role === 'STUDENT' ? '/assessments/student' : '/assessments',
       icon: <AssessmentIcon />
     },
     {

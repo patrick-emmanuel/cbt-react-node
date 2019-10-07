@@ -41,6 +41,12 @@ const Routes = () => {
         path="/assessments/new"
       />
       <RouteWithLayout
+        component={NewAssessmentView}
+        exact
+        layout={MainLayout}
+        path="/assessments/student"
+      />
+      <RouteWithLayout
         component={AssessmentDetailView}
         exact
         layout={MainLayout}
