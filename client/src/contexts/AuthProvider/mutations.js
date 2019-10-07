@@ -5,6 +5,7 @@ export const fragmentUser = gql`
     id
     email
     name
+    role
   }
 `;
 

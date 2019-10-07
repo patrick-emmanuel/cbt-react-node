@@ -85,6 +85,7 @@ export interface NexusGenInputs {
     id?: string | null; // ID
     name?: string | null; // String
     password: string; // String!
+    role?: NexusGenEnums['UserRole'] | null; // UserRole
   }
   UserWhereUniqueInput: { // input type
     email?: string | null; // String
@@ -94,6 +95,7 @@ export interface NexusGenInputs {
 
 export interface NexusGenEnums {
   QuestionType: photon.QuestionType
+  UserRole: photon.UserRole
 }
 
 export interface NexusGenRootTypes {
@@ -131,6 +133,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   UserCreateWithoutPostInput: NexusGenInputs['UserCreateWithoutPostInput'];
   UserWhereUniqueInput: NexusGenInputs['UserWhereUniqueInput'];
   QuestionType: NexusGenEnums['QuestionType'];
+  UserRole: NexusGenEnums['UserRole'];
 }
 
 export interface NexusGenFieldTypes {
@@ -190,6 +193,7 @@ export interface NexusGenFieldTypes {
     email: string; // String!
     id: string; // ID!
     name: string | null; // String
+    role: NexusGenEnums['UserRole']; // UserRole!
   }
 }
 
@@ -261,7 +265,7 @@ export type NexusGenObjectNames = "Assessment" | "AuthPayload" | "Mutation" | "P
 
 export type NexusGenInputNames = "AssessmentCreateInput" | "AssessmentCreateManyWithoutAssessmentsInput" | "AssessmentCreateWithoutAuthorInput" | "AssessmentWhereUniqueInput" | "QuestionCreateManyWithoutQuestionsInput" | "QuestionCreateWithoutAssessmentInput" | "QuestionOptionCreateManyWithoutOptionsInput" | "QuestionOptionCreateWithoutQuestionInput" | "QuestionOptionWhereUniqueInput" | "QuestionWhereUniqueInput" | "UserCreateOneWithoutAuthorInput" | "UserCreateWithoutPostInput" | "UserWhereUniqueInput";
 
-export type NexusGenEnumNames = "QuestionType";
+export type NexusGenEnumNames = "QuestionType" | "UserRole";
 
 export type NexusGenInterfaceNames = never;
 

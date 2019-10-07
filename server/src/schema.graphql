@@ -138,6 +138,7 @@ type User {
   email: String!
   id: ID!
   name: String
+  role: UserRole!
 }
 
 input UserCreateOneWithoutAuthorInput {
@@ -151,6 +152,12 @@ input UserCreateWithoutPostInput {
   id: ID
   name: String
   password: String!
+  role: UserRole
+}
+
+enum UserRole {
+  ADMIN
+  STUDENT
 }
 
 input UserWhereUniqueInput {
