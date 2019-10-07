@@ -35,8 +35,8 @@ export const LOGIN_MUTATION = gql`
 
 export const VERIFY_TOKEN_MUTATION = gql`
   ${fragmentUser}
-  mutation VerifyUser($token: String!) {
-    verifyUser(token: $token) {
+  mutation VerifyToken($token: String!) {
+    verifyToken(token: $token) {
       token
       user {
         ...User
