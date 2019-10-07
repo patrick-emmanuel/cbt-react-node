@@ -1,5 +1,5 @@
 import { compare, hash } from 'bcrypt'
-import { sign } from 'jsonwebtoken'
+import { sign, verify } from 'jsonwebtoken'
 import { idArg, mutationType, stringArg } from 'nexus'
 import { APP_SECRET, getUserId } from '../utils'
 
@@ -49,6 +49,28 @@ export const Mutation = mutationType({
         }
         return {
           token: sign({ userId: user.id }, APP_SECRET),
+          user,
+        }
+      },
+    })
+
+    t.field('verifyToken', {
+      type: 'AuthPayload',
+      args: {
+        token: stringArg(),
+      },
+      resolve: async (parent, { token }, context) => {
+        const { userId } = verify(token, APP_SECRET);
+        const user = await context.photon.users.findOne({
+          where: {
+            id: userId,
+          },
+        })
+        if (!user) {
+          throw new Error(`Invalid token: ${token}`)
+        }
+        return {
+          token,
           user,
         }
       },

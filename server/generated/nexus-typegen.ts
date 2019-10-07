@@ -157,6 +157,7 @@ export interface NexusGenFieldTypes {
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     publish: NexusGenRootTypes['Assessment'] | null; // Assessment
     signup: NexusGenRootTypes['AuthPayload']; // AuthPayload!
+    verifyToken: NexusGenRootTypes['AuthPayload']; // AuthPayload!
   }
   Post: { // field return type
     author: NexusGenRootTypes['User'] | null; // User
@@ -225,6 +226,9 @@ export interface NexusGenArgTypes {
       email?: string | null; // String
       name?: string | null; // String
       password?: string | null; // String
+    }
+    verifyToken: { // args
+      token?: string | null; // String
     }
   }
   Query: {
