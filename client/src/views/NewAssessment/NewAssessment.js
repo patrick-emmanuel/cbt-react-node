@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 import { AssessmentInfo, AssessmentQuestion } from './components';
 import { CREATE_ASSESSMENT } from './mutation';
+import { AuthContext } from 'contexts/AuthProvider';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,6 +28,7 @@ const useStyles = makeStyles(theme => ({
 
 const NewAssessment = ({ history }) => {
   const classes = useStyles();
+  const { user } = React.useContext(AuthContext);
   const [assessmentInfo, setAssessmentInfo] = useState({
     title: '',
     description: ''
@@ -81,24 +83,25 @@ const NewAssessment = ({ history }) => {
   }
 
   const onSubmit = (questions) => {
-    const authorId = localStorage.getItem('userId');
-    const create = formatQuestions(questions);
-    const { title, description } = assessmentInfo;
-    addAssessment({
-      variables: {
-        data: {
-          author: {
-            connect: {
-              id: authorId
-            }
-          },
-          title,
-          description,
-          published: false,
-          questions: { create }
+    if (user) {
+      const create = formatQuestions(questions);
+      const { title, description } = assessmentInfo;
+      addAssessment({
+        variables: {
+          data: {
+            author: {
+              connect: {
+                id: user.id
+              }
+            },
+            title,
+            description,
+            published: false,
+            questions: { create }
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   useEffect(() => {

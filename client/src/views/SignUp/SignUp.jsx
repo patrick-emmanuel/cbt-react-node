@@ -114,7 +114,6 @@ const SignUp = props => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (values) => {
-    debugger;
     const { name, email, password } = values;
     signUp({ variables: { name, email, password } });
   }
