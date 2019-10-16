@@ -47,7 +47,7 @@ const Sidebar = props => {
     },
     {
       title: 'Assessments',
-      href: user.role === 'STUDENT' ? '/assessments/student' : '/assessments',
+      href: user && user.role === 'STUDENT' ? '/assessments/student' : '/assessments',
       icon: <AssessmentIcon />
     },
     {

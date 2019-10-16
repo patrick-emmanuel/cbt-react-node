@@ -8,7 +8,7 @@ const SectionRoute = ({
   ...rest
 }) => {
   const token = getAuthToken();
-  // Implement permissions here.
+
   return (
     <>
       <Route

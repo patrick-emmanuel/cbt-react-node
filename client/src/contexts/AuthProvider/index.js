@@ -6,24 +6,32 @@ import {
   LOGIN_MUTATION,
   VERIFY_TOKEN_MUTATION
 } from './mutations';
-import { getAuthToken, setAuthToken, removeAuthToken } from '../../utils/auth';
+import {
+  getAuthToken,
+  getLoggedInUser,
+  saveCredentials,
+  deleteCredentials
+} from '../../utils/auth';
+import { defineAbility } from '../../utils/authorization/ability';
 
 export const AuthContext = React.createContext();
 
 const AuthProvider = ({ children, history }) => {
 
   const token = getAuthToken();
-  const [user, setUser] = React.useState('');
+  const [ability, setAbility] = React.useState(null);
+  const loggedInUser = JSON.parse(getLoggedInUser());
 
   const logout = () => {
-    removeAuthToken();
+    deleteCredentials();
     history.replace('/login');
     window.location.reload();
   };
 
   const authenticate = (token, user) => {
-    setAuthToken(token)
-    setUser(user);
+    saveCredentials(token, user)
+    const ability = defineAbility(user);
+    setAbility(ability);
     history.replace('/');
   };
 
@@ -68,13 +76,21 @@ const AuthProvider = ({ children, history }) => {
     }
   );
 
-  const [verifyToken] = useMutation(
+  const [
+    verifyToken,
+    {
+      data: verifyTokenData,
+      loading: verifyLoading,
+    }
+  ] = useMutation(
     VERIFY_TOKEN_MUTATION,
     {
       onCompleted(data) {
         if (data.verifyToken.user && data.verifyToken.token) {
           const { user } = data.verifyToken;
-          setUser(user);
+          if (user.id !== loggedInUser.id) {
+            logout();
+          }
         }
       },
       onError(error) {
@@ -86,21 +102,24 @@ const AuthProvider = ({ children, history }) => {
 
   React.useEffect(() => {
     const userToken = loginData && loginData.login ? loginData.login.token : token;
-    if (userToken && !user) {
+    if (userToken) {
       verifyToken({ variables: { token: userToken } });
     }
-  }, [verifyToken, loginData, token, user]);
+  }, [verifyToken, loginData, token]);
 
   return (
     <AuthContext.Provider
       value={{
         login,
         signUp,
+        ability,
         signUpError,
         loginError,
         loginLoading,
         signUpLoading,
-        user,
+        verifyLoading,
+        verifyTokenData,
+        user: loggedInUser,
         logout
       }}
     >

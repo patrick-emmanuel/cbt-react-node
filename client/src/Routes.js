@@ -9,6 +9,7 @@ import {
   AssessmentList as AssessmentsView,
   AssessmentDetail as AssessmentDetailView,
   NewAssessment as NewAssessmentView,
+  StudentAssessment as StudentAssessmentView,
   NotFound as NotFoundView,
   SignUp as SignUpView,
   Login as LoginView,
@@ -25,24 +26,30 @@ const Routes = () => {
       <RouteWithLayout
         component={DashboardView}
         exact
+        privateRoute
         layout={MainLayout}
         path="/dashboard"
       />
       <RouteWithLayout
         component={AssessmentsView}
         exact
+        privateRoute
         layout={MainLayout}
+        adminRoute
         path="/assessments"
       />
       <RouteWithLayout
         component={NewAssessmentView}
         exact
+        privateRoute
         layout={MainLayout}
+        adminRoute
         path="/assessments/new"
       />
       <RouteWithLayout
-        component={NewAssessmentView}
+        component={StudentAssessmentView}
         exact
+        privateRoute
         layout={MainLayout}
         path="/assessments/student"
       />
