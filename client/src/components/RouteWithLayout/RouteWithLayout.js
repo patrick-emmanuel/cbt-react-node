@@ -30,7 +30,7 @@ const RouteWithLayout = props => {
     );
   }
 
-  if (adminRoute && !user.role === 'ADMIN') {
+  if (adminRoute && user.role !== 'ADMIN') {
     return 'Unauthorized!'
   }
 
