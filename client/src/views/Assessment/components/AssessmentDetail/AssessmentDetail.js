@@ -11,8 +11,8 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import CheckCircle from '@material-ui/icons/CheckCircle';
 import {
   QuestionStat,
-} from './components';
-import { GET_ASSESSMENT } from './query';
+} from '.';
+import { GET_ASSESSMENT } from '../../query';
 import { DELETE_ASSESSMENT } from './mutation';
 
 const useStyles = makeStyles(theme => ({

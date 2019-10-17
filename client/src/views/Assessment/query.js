@@ -17,3 +17,14 @@ export const GET_ASSESSMENT = gql`
     }
   }
 `;
+
+export const GET_ASSESSMENTS = gql`
+  {
+    assessments {
+      id
+      title
+      description
+      createdAt
+    }
+  }
+`;

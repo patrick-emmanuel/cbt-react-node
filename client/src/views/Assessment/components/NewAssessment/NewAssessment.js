@@ -7,8 +7,8 @@ import {
   Card,
   CardContent
 } from '@material-ui/core';
-import { AssessmentInfo, AssessmentQuestion } from './components';
-import { CREATE_ASSESSMENT } from './mutation';
+import { AssessmentInfo, AssessmentQuestion } from '.';
+import { CREATE_ASSESSMENT } from '../../mutation';
 import { AuthContext } from 'contexts/AuthProvider';
 
 const useStyles = makeStyles(theme => ({

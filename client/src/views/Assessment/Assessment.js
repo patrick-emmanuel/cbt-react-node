@@ -1,5 +1,4 @@
-import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import {
   AppBar,
@@ -8,8 +7,7 @@ import {
   Typography,
   Box
 } from '@material-ui/core';
-import { GET_ASSESSMENTS } from './query';
-import { AssessmentsListToolbar, AssessmentsTable } from './components';
+import AssessmentList from './components/AssessmentList';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,6 +24,7 @@ function a11yProps(index) {
     'aria-controls': `simple-tabpanel-${index}`,
   };
 }
+
 // move to a generic 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -45,16 +44,13 @@ function TabPanel(props) {
 }
 
 const Assessment = () => {
-  const { loading, error, data } = useQuery(GET_ASSESSMENTS);
   const classes = useStyles();
-  const [tabIndex, setTabIndex] = React.useState(0);
+  const [tabIndex, setTabIndex] = useState(0);
+  // const [showNewAssessmentPage, setShowNewAssessmentPage] = (0);
 
   const handleChange = (event, newTabIndex) => {
     setTabIndex(newTabIndex);
   };
-
-  if (loading) return 'Loading...';
-  if (error) return `Error! ${error.message}`;
 
   return (
     <div className={classes.root}>
@@ -65,10 +61,7 @@ const Assessment = () => {
         </Tabs>
       </AppBar>
       <TabPanel value={tabIndex} index={0}>
-        <AssessmentsListToolbar />
-        <div className={classes.content}>
-          <AssessmentsTable assessments={data.assessments} />
-        </div>
+        <AssessmentList/>
       </TabPanel>
       <TabPanel value={tabIndex} index={1}>
         Another
