@@ -2,10 +2,11 @@ import Photon from '@generated/photon'
 const photon = new Photon()
 
 async function main() {
-  const user1 = await photon.users.create({
+  const user3 = await photon.users.create({
     data: {
-      email: 'alice@prisma.io',
-      name: 'Alice',
+      email: 'admin@cbt.com',
+      name: 'Patrick',
+      role: 'ADMIN',
       password: '$2b$10$ZjONRZAxqX2pLoPax2xdcuzABTUEsFanQI6yBYCRtzpRiU4/X1uIu', // "graphql"
       assessments: {
         create: {
@@ -16,28 +17,7 @@ async function main() {
       },
     },
   })
-  const user2 = await photon.users.create({
-    data: {
-      email: 'bob@prisma.io',
-      name: 'Bob',
-      password: '$2b$10$o6KioO.taArzboM44Ig85O3ZFZYZpR3XD7mI8T29eP4znU/.xyJbW', // "secret43"
-      assessments: {
-        create: [
-          {
-            title: 'Subscribe to GraphQL Weekly for community news',
-            description: 'https://graphqlweekly.com/',
-            published: true,
-          },
-          {
-            title: 'Follow Prisma on Twitter',
-            description: 'https://twitter.com/prisma/',
-            published: false,
-          },
-        ],
-      },
-    },
-  })
-  console.log({ user1, user2 })
+  console.log({ user3 })
 }
 
 main().finally(async () => {
