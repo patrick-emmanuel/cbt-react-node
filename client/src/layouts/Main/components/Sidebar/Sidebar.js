@@ -51,8 +51,8 @@ const Sidebar = props => {
       icon: <AssessmentIcon />
     },
     {
-      title: 'Users',
-      href: '/users',
+      title: 'Students',
+      href: '/students',
       icon: <PeopleIcon />
     },
     {
