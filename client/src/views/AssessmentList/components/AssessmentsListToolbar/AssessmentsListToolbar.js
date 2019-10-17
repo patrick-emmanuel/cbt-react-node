@@ -39,7 +39,7 @@ const AssessmentsListToolbar = props => {
           component={CustomLink}
           to="/assessments/new"
         >
-          Add Assessment
+          New Assessment
         </Button>
       </div>
     </div>
