@@ -11,7 +11,7 @@
     "@material-ui/icons": "^4.2.1",
     "@material-ui/styles": "^4.2.1",
     "apollo-boost": "^0.4.4",
-    "chart.js": "^2.8.0",
+    "chart.js": "^2.9.4",
     "clsx": "^1.0.4",
     "graphql": "^14.5.4",
     "history": "^4.9.0",
